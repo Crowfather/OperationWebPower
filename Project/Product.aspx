@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Project</title>
+    <title>Project - Product</title>
     <link rel="stylesheet" type="text/css" href="Styles/Product.css" />
     <script type="text/javascript" src="Product.js"></script>
 </head>
