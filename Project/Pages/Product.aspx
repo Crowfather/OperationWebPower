@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Project - Product</title>
-    <link rel="stylesheet" type="text/css" href="Styles/Product.css" />
-    <script type="text/javascript" src="Scripts/Product.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Styles/Product.css" />
+    <script type="text/javascript" src="../Scripts/Product.js"></script>
 </head>
 <body>
     <form id="main_form" runat="server">
@@ -56,7 +56,7 @@
                                             <td>
                                                 <!-- Logotype -->
                                                 <!-- DATABASE: Fetch the product logotype image from the database -->
-                                                <img id="content_logoimg" src="Resources/Img/placeholder-logo.png" alt="Product Logo" />
+                                                <img id="content_logoimg" src="../Resources/Img/placeholder-logo.png" alt="Product Logo" />
                                             </td>
                                         </tr>
                                         <tr>

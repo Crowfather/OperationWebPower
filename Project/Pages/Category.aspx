@@ -8,7 +8,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Project - Category</title>
-    <link href="Styles/Home.css" rel="stylesheet" />
+    <link href="../Styles/Home.css" rel="stylesheet" />
+    <link href="../Styles/Category.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
