@@ -22,7 +22,7 @@
         <div id="RightFiller"></div> 
         <div id="MainContent">
             Home/News
-        </div>       
+        </div>
     </div>
     </form>
 </body>

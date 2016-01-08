@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Project.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Product.aspx.cs" Inherits="Project.Product" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Project - Product</title>
     <link rel="stylesheet" type="text/css" href="Styles/Product.css" />
-    <script type="text/javascript" src="Product.js"></script>
+    <script type="text/javascript" src="Scripts/Product.js"></script>
 </head>
 <body>
     <form id="main_form" runat="server">

@@ -22,12 +22,12 @@
                             </a>
                         </td>
                         <td id="MenuCategoryCell" class="MenuCell">
-                            <a href="">
+                            <a href="Category.aspx">
                                 <div class="MenuCellDiv">Category</div>
                             </a>
                         </td>
                         <td id="MenuCommunityCell" class="MenuCell">
-                            <a href="">
+                            <a href="Product.aspx">
                                 <div class="MenuCellDiv">Community</div>
                             </a>
                         </td>
