@@ -9,7 +9,7 @@
         <tr>
             <td id="TopOuterFillerLeft"></td>
             <td>
-                <a href="default.aspx">
+                <a href="<%= ResolveUrl("~/Default.aspx") %>">
                     <img id="MenuLogo" src="../Resources/Img/logo.png" alt="Logo" />
                 </a>
             </td>
@@ -17,17 +17,17 @@
                 <table id="MenuTable">
                     <tr id="MenuRow">
                         <td id="MenuHomeCell" class="MenuCell">
-                            <a href="default.aspx">
+                            <a href="<%= ResolveUrl("~/Default.aspx") %>">
                                 <div class="MenuCellDiv">Home</div>
                             </a>
                         </td>
                         <td id="MenuCategoryCell" class="MenuCell">
-                            <a href="Category.aspx">
+                            <a href="<%= ResolveUrl("~/Pages/Category.aspx") %>">
                                 <div class="MenuCellDiv">Category</div>
                             </a>
                         </td>
                         <td id="MenuCommunityCell" class="MenuCell">
-                            <a href="Product.aspx">
+                            <a href="<%= ResolveUrl("~/Pages/Product.aspx") %>">
                                 <div class="MenuCellDiv">Community</div>
                             </a>
                         </td>

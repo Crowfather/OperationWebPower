@@ -12,7 +12,7 @@
         <!-- (Real CSS is included inside TopMenu.ascx !) -->
         <link href="~/Styles/TopMenu.css" rel="stylesheet" type="text/css" />
     <% } %>
-    <link href="Styles/Home.css" rel="stylesheet" />
+    <link href="Styles/PageLayout.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">

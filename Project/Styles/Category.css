@@ -1,0 +1,63 @@
+﻿body {
+    font-family: Arial;
+    color: white;
+}
+
+#CategoryMenu {
+    width: 100%;
+}
+
+.CategoryMenuCell {
+    position: relative;
+    width: 50%;
+    padding-top: 30px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 50px;
+    /* background-color: yellow; */
+}
+
+.CategoryMenuCell a {
+    color: white;
+    text-decoration: none;
+    background-color: yellow;
+}
+
+.CategoryMenuCellDiv {
+    width: calc(100px + 30%);
+    margin: 0 auto;
+    padding: 15% 10%;
+    background: radial-gradient(rgb(62, 105, 183), rgb(59, 103, 178), rgb(48, 92, 166));
+    /* background: radial-gradient(rgb(48, 93, 169), rgb(59,  103, 178), rgb(73, 119, 195)); */
+    /* background: radial-gradient(rgb(48, 93, 169), rgb(59,  103, 178), rgb(62, 110, 193)); */
+    /* background: radial-gradient(rgb(48, 92, 166), rgb(62, 105, 183)); */
+    /* background: radial-gradient(blue, darkblue); */
+    border: 1px solid black;
+    border-radius: 20%;
+    text-align: center;
+}
+
+.CategoryMenuCellDiv:hover {
+    background: radial-gradient(blue, darkblue);
+}
+
+.CategoryMenuCellDiv h1 {
+    font-size: 2vmax;
+    text-shadow: 2px 2px 0px black;
+}
+
+.CategoryMenuCellDel {
+    position: absolute;
+    top: 25px;
+    right: 25%;
+    width: 25px;
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.CategoryMenuCellDel:hover {
+    background-color: pink;
+}
