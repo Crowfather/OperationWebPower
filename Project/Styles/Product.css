@@ -103,6 +103,7 @@ h6
     border: 2px solid #203447;
     background: #8DADE6;
     background: radial-gradient(#CFDBFF, #A4BFEC, #497CD7);
+    vertical-align: top;
 }
 
 /* Design for the table containing the content (such as logo image, content text etc.) in the product section. */
