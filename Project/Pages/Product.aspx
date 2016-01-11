@@ -19,7 +19,7 @@
         <div id="RightFiller"></div> 
         <div id="MainContent">
             <!-- Product area table -->
-            <table>
+            <table id="productsection_table">
                 <tr>
                     <!-- Tabs -->
                     <td id="productsection_tab_product" class="productsection_tab_design productsection_tab_text productsection_tab_selected">
@@ -29,10 +29,10 @@
                         <h3>Content</h3>
                     </td>
                     <td id="productsection_tab_rating" class="productsection_tab_design productsection_tab_text productsection_tab_unselected">
-                        <h3>Rating and<br />comments</h3>
+                        <h3>Rating and comments</h3>
                     </td>
                     <td id="productsection_tab_sysreq" class="productsection_tab_design productsection_tab_text productsection_tab_unselected">
-                        <h3>System<br />requirements</h3>
+                        <h3>System requirements</h3>
                     </td>
                     <td id="productsection_tab_share" class="productsection_tab_design productsection_tab_text productsection_tab_unselected">
                         <h3>Share</h3>
