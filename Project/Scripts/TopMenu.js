@@ -1,5 +1,23 @@
-﻿/* OnLoad */
-window.onload = function () {
+﻿/*  */
+// http://stackoverflow.com/questions/2276961/is-there-for-window-onload-in-javascript?rq=1
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    }
+    else {
+        window.onload = function () {
+            oldonload();
+            func();
+        }
+    }
+}
+
+addLoadEvent(topmenuload);
+
+
+/* OnLoad */
+function topmenuload() {
     //Give all the menu cells onclick events
     var menucats = document.getElementsByClassName("MenuCell");
     for (i = 0; i < menucats.length; ++i) {

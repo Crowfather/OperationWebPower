@@ -1,3 +1,4 @@
+﻿
 window.onload = function()
 {
     /* Give all the tabs onclick-events */
