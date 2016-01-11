@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,23 +16,26 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
 
     protected void Page_Load(object sender, EventArgs e) {
         if(!IsPostBack) {
-            //FIXA in hämta från databas här!
-            switch(Request.QueryString["category"]) {
-                case "Design":
-                    cats = new List<string>(designcats);
-                    break;
-                case "Music":
-                    cats = new List<string>(musiccats);
-                    break;
-                case "Programming":
-                    cats = new List<string>(programmingcats);
-                    break;
-                case "Economy":
-                    cats = new List<string>(economycats);
-                    break;
-                default:
-                    cats = new List<string>();
-                    break;
+
+            // Get SQL login data from file
+            System.IO.StreamReader file =
+            new System.IO.StreamReader(Server.MapPath("~/LoginData.txt"));
+            string username = file.ReadLine();
+            string password = file.ReadLine();
+
+            SqlConnection sqlconn = DatabaseHelper.OpenDatabase(username, password);
+            if (sqlconn != null) {
+
+                cats =  DatabaseHelper.GetSubCategories(sqlconn, Request.QueryString["category"]);
+
+                if (cats == null) {
+                    // TODO handle error
+                }
+
+                DatabaseHelper.CloseDatabase(sqlconn);
+            }
+            else {
+                // TODO display database error
             }
         }
 

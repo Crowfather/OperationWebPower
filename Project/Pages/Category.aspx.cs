@@ -1,21 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace Project {
-    public partial class Category : System.Web.UI.Page {
+namespace Project
+{
+    public partial class Category : System.Web.UI.Page
+    {
         private static string[] defaultcats = { "Design", "Music", "Programming", "Economy"/*, "Cat1", "Cat2"*/ };
         private static List<string> cats = new List<string>(defaultcats);
         private static int count = 0;
-        
+
         protected void Page_Load(object sender, EventArgs e) {
-            if(!IsPostBack) {
-                cats = new List<string>(defaultcats); //FIXA in hämta från databas här!
+            if (!IsPostBack) {
+                // Get SQL login data from file
+                System.IO.StreamReader file =
+                new System.IO.StreamReader(Server.MapPath("~/LoginData.txt"));
+                string username = file.ReadLine();
+                string password = file.ReadLine();
+
+                SqlConnection sqlconn = DatabaseHelper.OpenDatabase(username, password);
+                if (sqlconn != null) {
+
+                    cats = DatabaseHelper.GetMainCategories(sqlconn);
+
+                    if (cats == null) {
+                        // TODO handle error
+                    }
+
+                    DatabaseHelper.CloseDatabase(sqlconn);
+                }
+                else {
+                    // TODO display database error
+                }
 
                 //CreateCategoryTable(cats);
-                
+
                 //MainContent.Controls.Add(tbl); //Moved into UpdatePanel instead!
             }
 
@@ -41,7 +63,7 @@ namespace Project {
             //Remove category (get text of category associated with the pressed X-button)
             string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0].Controls[0].Controls[0]).InnerText;
             cats.Remove(toremove);
-            
+
             /*
                 Fixa????
                 Blir dubbelkallning då tabellen skapas om både här och och i Page_Load()
@@ -50,7 +72,7 @@ namespace Project {
                 (t.ex. uppdaterades inte på första försöket så man fick lov att trycka flera gånger och att det inte gick att ta bort den allra sista kategorin alls)
             */
             CreateCategoryTable(cats);
-            
+
             //Fixa in signlera databas att ta bort kategori osv. ...?
             //(Ta bort mappar/.aspx filer ?)
             //Fixa om till hämta från databas!
@@ -61,7 +83,7 @@ namespace Project {
         private void CreateCategoryTable(List<string> cats) {
             int i = 0;
 
-            if(CategoryMenu.Controls.Count > 0) {
+            if (CategoryMenu.Controls.Count > 0) {
                 CategoryMenu.Controls.Clear();
             }
             TableRow tr = null;
@@ -70,9 +92,9 @@ namespace Project {
             count++;
             //cats[0] = count.ToString();
 
-            for(i = 0; i < cats.Count; ++i) {
-                if((i % 2) == 0) { //Every other
-                    if(tr != null) {
+            for (i = 0; i < cats.Count; ++i) {
+                if ((i % 2) == 0) { //Every other
+                    if (tr != null) {
                         CategoryMenu.Controls.Add(tr); //Add filled row
                     }
                     tr = new TableRow();
@@ -90,7 +112,7 @@ namespace Project {
                 ha.Controls.Add(pan);
                 td.Controls.Add(ha);
                 //---X delete button---
-                if(Session["admin"] == null) { //FIXA OM NÄR VI FIXAT IN RIKTIG INLOGGNING
+                if (Session["admin"] == null) { //FIXA OM NÄR VI FIXAT IN RIKTIG INLOGGNING
                     Button btn = new Button();
                     btn.ID = "CategoryMenuCellDelBtn" + i;
                     btn.CssClass = "CategoryMenuCellDel";
@@ -108,8 +130,8 @@ namespace Project {
                 //---------------------
                 tr.Controls.Add(td);
             }
-            if(tr != null) { //Just incase it didnt loop
-                if((i % 2) != 0) { //Uneven -> Add extra empty cell
+            if (tr != null) { //Just incase it didnt loop
+                if ((i % 2) != 0) { //Uneven -> Add extra empty cell
                     td = new TableCell();
                     td.CssClass = "CategoryMenuCell";
                     tr.Controls.Add(td);
