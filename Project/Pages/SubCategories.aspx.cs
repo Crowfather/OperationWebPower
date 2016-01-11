@@ -17,13 +17,7 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
         if(!IsPostBack) {
 
-            // Get SQL login data from file
-            System.IO.StreamReader file =
-            new System.IO.StreamReader(Server.MapPath("~/LoginData.txt"));
-            string username = file.ReadLine();
-            string password = file.ReadLine();
-
-            SqlConnection sqlconn = DatabaseHelper.OpenDatabase(username, password);
+            SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
             if (sqlconn != null) {
 
                 cats =  DatabaseHelper.GetSubCategories(sqlconn, Request.QueryString["category"]);
@@ -51,11 +45,17 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
         string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0].Controls[0].Controls[0]).InnerText;
         cats.Remove(toremove);
 
-        CreateSubCatTable(cats);
+        SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+        if (sqlconn != null) {
+            DatabaseHelper.RemoveSubCategory(sqlconn, Request.QueryString["category"], toremove);
 
-        //Fixa in signlera databas att ta bort kategori osv. ...?
-        //(Ta bort mappar/.aspx filer ?)
-        //Fixa om till hämta från databas!
+            DatabaseHelper.CloseDatabase(sqlconn);
+        }
+        else {
+            // TODO display database error
+        }
+
+        CreateSubCatTable(cats);
 
         UpdatePan.Update();
     }
@@ -89,7 +89,7 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
             ha.Controls.Add(pan);
             td.Controls.Add(ha);
             //---X delete button---
-            if(Session["admin"] == null) { //FIXA OM NÄR VI FIXAT IN RIKTIG INLOGGNING
+            if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                 Button btn = new Button();
                 btn.ID = "SubCatMenuCellDelBtn" + i;
                 btn.CssClass = "SubCatMenuCellDel";

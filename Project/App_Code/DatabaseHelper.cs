@@ -23,6 +23,30 @@ public static class DatabaseHelper
         }
     }
 
+    public static SqlConnection OpenDatabase(string loginFilePath) {
+
+        // Get SQL login data from file
+        System.IO.StreamReader file =
+        new System.IO.StreamReader(loginFilePath);
+        string username = file.ReadLine();
+        string password = file.ReadLine();
+
+        if (username == null || password == null) {
+            return null;
+        }
+
+        string connString = "Data Source=www3.idt.mdh.se;Initial Catalog=mrt10002WebCourse;User ID=" + username + ";Password=" + password;
+        SqlConnection sqlconn = new SqlConnection(connString);
+
+        try {
+            sqlconn.Open();
+            return sqlconn;
+        }
+        catch {
+            return null;
+        }
+    }
+
     public static bool CloseDatabase(SqlConnection sqlconn) {
         try {
             sqlconn.Close();
@@ -132,6 +156,29 @@ public static class DatabaseHelper
         }
     }
 
+    public static bool RemoveMainCategory(SqlConnection sqlconn, string mainCategoryName) {
+
+        SqlCommand query = new SqlCommand("proc_remove_main_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            } 
+        }
+        catch {
+            return false;
+        }
+    }
+
     public static List<string> GetSubCategories(SqlConnection sqlconn, string mainCategory) {
 
         SqlCommand query = new SqlCommand("proc_get_sub_category", sqlconn);
@@ -154,6 +201,31 @@ public static class DatabaseHelper
         }
         catch {
             return null;
+        }
+    }
+
+    public static bool RemoveSubCategory(SqlConnection sqlconn, string mainCategoryName, string subCategoryName) {
+
+        SqlCommand query = new SqlCommand("proc_remove_sub_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
+        
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            } 
+        }
+        catch {
+            return false;
         }
     }
 }

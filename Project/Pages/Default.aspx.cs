@@ -1,6 +1,6 @@
 ﻿using System;
 
-public partial class TopMenu : System.Web.UI.UserControl {
+public partial class _Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
 
     }

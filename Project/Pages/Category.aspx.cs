@@ -15,13 +15,8 @@ namespace Project
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
-                // Get SQL login data from file
-                System.IO.StreamReader file =
-                new System.IO.StreamReader(Server.MapPath("~/LoginData.txt"));
-                string username = file.ReadLine();
-                string password = file.ReadLine();
 
-                SqlConnection sqlconn = DatabaseHelper.OpenDatabase(username, password);
+                SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
                 if (sqlconn != null) {
 
                     cats = DatabaseHelper.GetMainCategories(sqlconn);
@@ -73,9 +68,15 @@ namespace Project
             */
             CreateCategoryTable(cats);
 
-            //Fixa in signlera databas att ta bort kategori osv. ...?
-            //(Ta bort mappar/.aspx filer ?)
-            //Fixa om till hämta från databas!
+            SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+            if (sqlconn != null) {
+                DatabaseHelper.RemoveMainCategory(sqlconn, toremove);
+
+                DatabaseHelper.CloseDatabase(sqlconn);
+            }
+            else {
+                // TODO display database error
+            }
 
             UpdatePan.Update();
         }
@@ -112,7 +113,7 @@ namespace Project
                 ha.Controls.Add(pan);
                 td.Controls.Add(ha);
                 //---X delete button---
-                if (Session["admin"] == null) { //FIXA OM NÄR VI FIXAT IN RIKTIG INLOGGNING
+                if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                     Button btn = new Button();
                     btn.ID = "CategoryMenuCellDelBtn" + i;
                     btn.CssClass = "CategoryMenuCellDel";
