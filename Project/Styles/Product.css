@@ -1,23 +1,16 @@
-﻿html, body
-{
-    height: 100%;
-}
-
-/* General values to shrink tables and cells to the minimum fit over their content */
+﻿/* General values to shrink tables and cells to the minimum fit over their content */
 table
 {
-    border-collapse: collapse;
     border: 0px;
     margin: 0px;
-	padding: 0px;
+    padding: 0px;
 }
 
 td
 {
-    border-collapse: collapse;
     border: 0px;
     margin: 0px;
-	padding: 0px;
+    padding: 0px;
 }
 
 /* NOTE: margin must be specified in the specific cases of h1, h2 etc. to space text rows */
@@ -57,30 +50,13 @@ h6
     margin-bottom: 6px;*/
 }
 
-#maintable
-{
-    height: 100%;
+#productsection_table {
     width: 100%;
-    background: #6595C8;
-    background: linear-gradient(#9ABEE0, #6595C8, #2E75B6);
+    height: 100%;
 }
 
-/* Used to fill a small row at the top of the page */
-.maintable_fillercell_top
-{
-	height: 10px;
-}
-
-/* Used to create columns at the left and right sides of the page */
-.maintable_fillercell_side
-{
-    width: 10%;
-}
-
-/* Used to fill empty space at the bottom of the page */
-.maintable_fillercell_bottom
-{
-	height: 100%;
+#productsection_table tr {
+    width: 100%;
 }
 
 .productsection_tab_text

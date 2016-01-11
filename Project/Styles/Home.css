@@ -1,0 +1,75 @@
+﻿/* General values to shrink tables and cells to the minimum fit over their content */
+table
+{
+    border: 0px;
+    margin: 0px;
+	  padding: 0px;
+}
+
+td
+{
+    border: 0px;
+    margin: 0px;
+	  padding: 0px;
+}
+
+/* NOTE: margin must be specified in the specific cases of h1, h2 etc. to space text rows */
+h1, h2, h3, h4, h5, h6, p
+{
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, Sans-Serif;
+    line-height: 0.0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+    text-shadow: 1px 1px 2px black; /* Not supported in the CSS 2.1 standard, but will show in most modern browsers. */
+}
+
+/* Used for main titles. */
+h1
+{
+    font-size: 42px;
+    line-height: 1.8;
+    /*margin-top: 26px;
+    margin-bottom: 26px;*/ /* Margins is an alternative to line-height to change the distance to elements other than text on top or bottom of the text. */
+}
+
+
+/* Used for text on tabs. */
+h3
+{
+    font-size: 20px;
+    line-height: 1.20;
+}
+
+/* Used for regular text. */
+h6
+{
+    font-size: 18px;
+    line-height: 1.3;
+    /*margin-top: 6px;
+    margin-bottom: 6px;*/
+}
+
+#newstable_containertable
+{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* TODO: Merge this with #productsection_contentcell in Product.css */
+#containertable
+{
+    /* background: #8DADE6; */
+    /* background: radial-gradient(#CFDBFF, #A4BFEC, #497CD7); */
+}
+
+#newstable
+{
+    margin: 10px;
+}
+
+#containertable_fillercell_right
+{
+    width: 100%;
+}
