@@ -8,7 +8,11 @@ using System.Web.UI.WebControls;
 namespace Project {
     public partial class Product : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            //string meh = HttpContext.Current.Request.Url.AbsolutePath;
+            //localhost:10881/Project/Pages/Product.aspx
+            string meh = Request.Url.AbsoluteUri;
 
+            Comments.Attributes["data-href"] = Request.Url.AbsoluteUri;
         }
     }
 }

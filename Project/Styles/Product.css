@@ -118,3 +118,9 @@ h6
     width: 250px;
     height: 250px;
 }
+
+#Comments
+{
+    data-width="100%";
+    data-numposts="5"    
+}
