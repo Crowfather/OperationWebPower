@@ -10,7 +10,7 @@
             <td id="TopOuterFillerLeft"></td>
             <td>
                 <a href="<%= ResolveUrl("~/Default.aspx") %>">
-                    <img id="MenuLogo" src="../Resources/Img/logo.png" alt="Logo" />
+                    <img id="MenuLogo" src="<%= ResolveUrl("~/Resources/Img/logo.png") %>" alt="Logo" />
                 </a>
             </td>
             <td>

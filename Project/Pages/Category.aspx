@@ -15,6 +15,7 @@
     <% } %>
     <link href="../Styles/PageLayout.css" rel="stylesheet" />
     <link href="../Styles/Category.css" rel="stylesheet" />
+    <script src="../Scripts/Category.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -23,47 +24,54 @@
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            <asp:Table ID="CategoryMenu" runat="server">
+            <asp:ScriptManager ID="ScriptMan" runat="server" />
+            <asp:UpdatePanel ID="UpdatePan" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
+                <ContentTemplate>
+                    <asp:Table ID="CategoryMenu" runat="server"></asp:Table>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <%-- <asp:Table ID="CategoryMenu" runat="server"></asp:Table> --%>
+            <%-- <asp:Table ID="CategoryMenu" runat="server">
                 <asp:TableRow>
                     <asp:TableCell CssClass="CategoryMenuCell">
                             <a href="./Categories/Design.aspx">
-                                <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivLeft" runat="server">
+                                <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                                     <h1>Design</h1>
                                 </asp:Panel>
                             </a>
-                            <asp:Button CssClass="CategoryMenuCellDel" OnPreRender="CategoryMenuCellDel_PreRender" Text="X" runat="server" />
+                            <asp:Button CssClass="CategoryMenuCellDel" Text="X" runat="server" />
                     </asp:TableCell>
                     <asp:TableCell CssClass="CategoryMenuCell">
-                        <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivRight" runat="server">
+                        <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                             <h1>Music</h1>
                         </asp:Panel>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="CategoryMenuCell">
-                        <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivLeft" runat="server">
+                        <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                             <h1>Programming</h1>
                         </asp:Panel>
                     </asp:TableCell>
                     <asp:TableCell CssClass="CategoryMenuCell">
-                        <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivRight" runat="server">
+                        <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                             <h1>Economy</h1>
                         </asp:Panel>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="CategoryMenuCell">
-                        <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivLeft" runat="server">
+                        <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                             <h1>Category 1</h1>
                         </asp:Panel>
                     </asp:TableCell>
                     <asp:TableCell CssClass="CategoryMenuCell">
-                        <asp:Panel CssClass="CategoryMenuCellDiv CategoryMenuCellDivRight" runat="server">
+                        <asp:Panel CssClass="CategoryMenuCellDiv" runat="server">
                             <h1>Category 2</h1>
                         </asp:Panel>
                     </asp:TableCell>
                 </asp:TableRow>
-            </asp:Table>
+            </asp:Table> --%>
         </div>
     </div>
     </form>
