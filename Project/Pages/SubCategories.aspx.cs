@@ -60,7 +60,6 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
 
     /*
         The function called by the Add-button.
-        (Registers as a trigger on the updatepanel (AJAX))
     */
     protected void AddClick(object sender, EventArgs e) {
         string categoryName = Request.QueryString["category"];
@@ -74,9 +73,11 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
     private void CreateSubCatTable(List<string> cats) {
         int i = 0;
 
+        //Clean old table-data
         if(SubCatMenu.Controls.Count > 0) {
             SubCatMenu.Controls.Clear();
         }
+
         TableRow tr = null;
         TableCell td = null;
         
@@ -135,13 +136,6 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
             btn.ID = "CategoryMenuCellAdd";
             btn.Text = "+";
             btn.Click += AddClick;
-            //---Register Ajax trigger---
-            AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
-            trig.ControlID = btn.UniqueID;
-            trig.EventName = "Click";
-            UpdatePan.Triggers.Add(trig);
-            //---------------------------
-            //td.Controls.Add(btn);
             MainContent.Controls.Add(btn);
         }
         //---------------------

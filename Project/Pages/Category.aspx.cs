@@ -67,7 +67,6 @@ namespace Project
 
         /*
             The function called by the Add-button.
-            (Registers as a trigger on the updatepanel (AJAX))
         */
         protected void AddClick(object sender, EventArgs e) {
             Response.Redirect("AddCategory.aspx");
@@ -76,15 +75,17 @@ namespace Project
         private void CreateCategoryTable(List<string> cats) {
             int i = 0;
 
+            //Clean old table data
             if(CategoryMenu.Controls.Count > 0) {
                 CategoryMenu.Controls.Clear();
             }
-            TableRow tr = null;
-            TableCell td = null;
 
             //count++;
             //cats[0] = count.ToString();
 
+            TableRow tr = null;
+            TableCell td = null;
+            
             for(i = 0; i < cats.Count; ++i) {
                 if((i % 2) == 0) { //Every other
                     if(tr != null) {
@@ -114,7 +115,6 @@ namespace Project
                     //---Register Ajax trigger---
                     AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
                     trig.ControlID = btn.UniqueID;
-                    //cats[0] = btn.UniqueID;
                     trig.EventName = "Click";
                     UpdatePan.Triggers.Add(trig);
                     //---------------------------
@@ -129,29 +129,7 @@ namespace Project
                 if((i % 2) != 0) { //Uneven -> Add extra empty cell (if not logged in as admin)
                     td = new TableCell();
                     td.CssClass = "CategoryMenuCell";
-                    /* NOTERA ATT DETTA BARA ÄR EN BÖRJAN FÖR +ADD KNAPPEN OCH LÅNGT IFRÅN KLART! */
-                    /*if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
-                        //If logged in as admin -> add +ADD button
-                        Button btn = new Button();
-                        btn.ID = "CategoryMenuCellAdd";
-                        btn.Text = "+";
-                        btn.Click += AddClick;
-                        //---Register Ajax trigger---
-                        AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
-                        trig.ControlID = btn.UniqueID;
-                        trig.EventName = "Click";
-                        UpdatePan.Triggers.Add(trig);
-                        //---------------------------
-                        td.Controls.Add(btn);
-                    }*/
                     tr.Controls.Add(td);
-                }
-                else if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
-                    //If logged in -> add +ADD button AND an extra empty cell
-                    CategoryMenu.Controls.Add(tr); //Add the last row
-                    //tr = new TableRow();
-
-                    //CategoryMenu.Controls.Add(tr); //Add the last row
                 }
                 CategoryMenu.Controls.Add(tr); //Add the last row
             }
@@ -163,13 +141,6 @@ namespace Project
                 btn.ID = "CategoryMenuCellAdd";
                 btn.Text = "+";
                 btn.Click += AddClick;
-                //---Register Ajax trigger---
-                AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
-                trig.ControlID = btn.UniqueID;
-                trig.EventName = "Click";
-                UpdatePan.Triggers.Add(trig);
-                //---------------------------
-                //td.Controls.Add(btn);
                 MainContent.Controls.Add(btn);
             }
             //---------------------
