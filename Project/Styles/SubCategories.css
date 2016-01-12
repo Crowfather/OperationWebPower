@@ -24,6 +24,7 @@
 }
 
 .SubCatMenuCellDiv {
+    position: relative;
     display: table-cell;
     width: 17vmax;
     /* padding: 15% 10%; */
@@ -46,8 +47,8 @@
 
 .SubCatMenuCellDel {
     position: absolute;
-    top: 16%;
-    right: 17%;
+    top: 0px;
+    right: 0px;
     width: 25px;
     background-color: red;
     border: 1px solid black;

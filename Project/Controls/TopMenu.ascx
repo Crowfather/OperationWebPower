@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="TopMenu.ascx.cs" Inherits="TopMenu"%>
-<!-- <%@ OutputCache Duration="120" VaryByParam="None" %> -->
 
 <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/TopMenu.css") %>" />
 <script src="<%= ResolveUrl("~/Scripts/TopMenu.js") %>"></script>

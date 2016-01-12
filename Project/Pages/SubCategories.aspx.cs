@@ -8,15 +8,11 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
-    private static string[] designcats = { "Data Design", "Game Design", "Level Design", "Logo Design", "Product Design", "UX Design" };
-    private static string[] musiccats = { };
-    private static string[] programmingcats = { };
-    private static string[] economycats = { };
+    //private static string[] designcats = { "Data Design", "Game Design", "Level Design", "Logo Design", "Product Design", "UX Design" };
     private static List<string> cats;// = new List<string>(designcats);
 
     protected void Page_Load(object sender, EventArgs e) {
         if(!IsPostBack) {
-
             SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
             if (sqlconn != null) {
 
@@ -31,6 +27,8 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
             else {
                 // TODO display database error
             }
+            
+            //cats = new List<string>(designcats);
         }
 
         CreateSubCatTable(cats);
@@ -42,7 +40,7 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
     */
     protected void DelClick(object sender, EventArgs e) {
         //Remove category (get text of category associated with the pressed X-button)
-        string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0].Controls[0].Controls[0]).InnerText;
+        string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
         cats.Remove(toremove);
 
         SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
@@ -86,8 +84,6 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
             HtmlGenericControl hgc = new HtmlGenericControl("h1");
             hgc.InnerText = cats[i];
             pan.Controls.Add(hgc);
-            ha.Controls.Add(pan);
-            td.Controls.Add(ha);
             //---X delete button---
             if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                 Button btn = new Button();
@@ -102,9 +98,11 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
                 trig.EventName = "Click";
                 UpdatePan.Triggers.Add(trig);
                 //---------------------------
-                td.Controls.Add(btn);
+                pan.Controls.Add(btn);
             }
             //---------------------
+            ha.Controls.Add(pan);
+            td.Controls.Add(ha);
             tr.Controls.Add(td);
         }
         if(tr != null) { //Just incase it didnt loop

@@ -24,6 +24,7 @@
 }
 
 .CategoryMenuCellDiv {
+    position: relative;
     display: table-cell;
     /* width: calc(100px + 30%); */
     width: 20vmax;
@@ -52,8 +53,8 @@
 
 .CategoryMenuCellDel {
     position: absolute;
-    top: 10%;
-    right: 25%;
+    top: 0px;
+    right: 0px;
     width: 25px;
     background-color: red;
     border: 1px solid black;
@@ -64,4 +65,13 @@
 
 .CategoryMenuCellDel:hover {
     background-color: pink;
+}
+
+#CategoryMenuCellAdd { /* UNFINISHED */
+    position: relative;
+    width: 10vmax;
+    height: 10vmax;
+    border: 1px solid black;
+    border-radius: 20%;
+    background-color: green;
 }

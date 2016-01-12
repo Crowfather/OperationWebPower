@@ -9,13 +9,12 @@ namespace Project
 {
     public partial class Category : System.Web.UI.Page
     {
-        private static string[] defaultcats = { "Design", "Music", "Programming", "Economy"/*, "Cat1", "Cat2"*/ };
-        private static List<string> cats = new List<string>(defaultcats);
-        private static int count = 0;
-
+        //private static string[] defaultcats = { "Design", "Music", "Programming", "Economy"/*, "Cat1", "Cat2"*/ };
+        private static List<string> cats;// = new List<string>(defaultcats);
+        //private static int count = 0;
+        
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
-
                 SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
                 if (sqlconn != null) {
 
@@ -31,22 +30,14 @@ namespace Project
                     // TODO display database error
                 }
 
+                //cats = new List<string>(defaultcats);
                 //CreateCategoryTable(cats);
-
-                //MainContent.Controls.Add(tbl); //Moved into UpdatePanel instead!
             }
 
             /*if(ScriptMan.IsInAsyncPostBack) {
                 CreateCategoryTable(cats);
             }*/
 
-            /*
-                Fixa????
-                Blir dubbelkallning då tabellen skapas om både här och och i DelClick()
-                (Page_Load kallas även vid uppdatering utav en UpdatePanel då det blir en POST-back)
-                Om jag kallade på CreateCategoryTable() på bara ena utav ställena så blev det oresponsivt
-                (t.ex. uppdaterades inte på första försöket så man fick lov att trycka flera gånger och att det inte gick att ta bort den allra sista kategorin alls)
-            */
             CreateCategoryTable(cats);
         }
 
@@ -56,16 +47,9 @@ namespace Project
         */
         protected void DelClick(object sender, EventArgs e) {
             //Remove category (get text of category associated with the pressed X-button)
-            string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0].Controls[0].Controls[0]).InnerText;
+            string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
             cats.Remove(toremove);
-
-            /*
-                Fixa????
-                Blir dubbelkallning då tabellen skapas om både här och och i Page_Load()
-                (Page_Load kallas även vid uppdatering utav en UpdatePanel då det blir en POST-back)
-                Om jag kallade på CreateCategoryTable() på bara ena utav ställena så blev det oresponsivt
-                (t.ex. uppdaterades inte på första försöket så man fick lov att trycka flera gånger och att det inte gick att ta bort den allra sista kategorin alls)
-            */
+            
             CreateCategoryTable(cats);
 
             SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
@@ -81,6 +65,16 @@ namespace Project
             UpdatePan.Update();
         }
 
+        /*
+            The function called by the Add-button.
+            (Registers as a trigger on the updatepanel (AJAX))
+        */
+        protected void AddClick(object sender, EventArgs e) {
+
+
+            UpdatePan.Update();
+        }
+
         private void CreateCategoryTable(List<string> cats) {
             int i = 0;
 
@@ -90,7 +84,7 @@ namespace Project
             TableRow tr = null;
             TableCell td = null;
 
-            count++;
+            //count++;
             //cats[0] = count.ToString();
 
             for (i = 0; i < cats.Count; ++i) {
@@ -103,6 +97,7 @@ namespace Project
                 td = new TableCell();
                 td.CssClass = "CategoryMenuCell";
                 HtmlAnchor ha = new HtmlAnchor();
+                ha.ID = "CategoryMenuCellA" + i;
                 //ha.HRef = "./Categories/" + cats[i] + ".aspx";
                 ha.HRef = "SubCategories.aspx?category=" + cats[i];
                 Panel pan = new Panel();
@@ -110,8 +105,6 @@ namespace Project
                 HtmlGenericControl hgc = new HtmlGenericControl("h1");
                 hgc.InnerText = cats[i];
                 pan.Controls.Add(hgc);
-                ha.Controls.Add(pan);
-                td.Controls.Add(ha);
                 //---X delete button---
                 if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                     Button btn = new Button();
@@ -123,19 +116,44 @@ namespace Project
                     //---Register Ajax trigger---
                     AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
                     trig.ControlID = btn.UniqueID;
+                    //cats[0] = btn.UniqueID;
                     trig.EventName = "Click";
                     UpdatePan.Triggers.Add(trig);
                     //---------------------------
-                    td.Controls.Add(btn);
+                    pan.Controls.Add(btn);
                 }
                 //---------------------
+                ha.Controls.Add(pan);
+                td.Controls.Add(ha);
                 tr.Controls.Add(td);
             }
             if (tr != null) { //Just incase it didnt loop
-                if ((i % 2) != 0) { //Uneven -> Add extra empty cell
+                if((i % 2) != 0) { //Uneven -> Add extra empty cell (if not logged in as admin)
                     td = new TableCell();
                     td.CssClass = "CategoryMenuCell";
+                    /* NOTERA ATT DETTA BARA ÄR EN BÖRJAN FÖR +ADD KNAPPEN OCH LÅNGT IFRÅN KLART! */
+                    /*if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                        //If logged in as admin -> add +ADD button
+                        Button btn = new Button();
+                        btn.ID = "CategoryMenuCellAdd";
+                        btn.Text = "+";
+                        btn.Click += AddClick;
+                        //---Register Ajax trigger---
+                        AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
+                        trig.ControlID = btn.UniqueID;
+                        trig.EventName = "Click";
+                        UpdatePan.Triggers.Add(trig);
+                        //---------------------------
+                        td.Controls.Add(btn);
+                    }*/
                     tr.Controls.Add(td);
+                }
+                else if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                    //If logged in -> add +ADD button AND an extra empty cell
+                    CategoryMenu.Controls.Add(tr); //Add the last row
+                    //tr = new TableRow();
+
+                    //CategoryMenu.Controls.Add(tr); //Add the last row
                 }
                 CategoryMenu.Controls.Add(tr); //Add the last row
             }

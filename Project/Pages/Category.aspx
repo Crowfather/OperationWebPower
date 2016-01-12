@@ -27,7 +27,7 @@
             <asp:ScriptManager ID="ScriptMan" runat="server" />
             <asp:UpdatePanel ID="UpdatePan" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
                 <ContentTemplate>
-                    <asp:Table ID="CategoryMenu" runat="server"></asp:Table>
+                    <asp:Table ID="CategoryMenu" EnableViewState="false" runat="server"></asp:Table>
                 </ContentTemplate>
             </asp:UpdatePanel>
             <%-- <asp:Table ID="CategoryMenu" runat="server"></asp:Table> --%>
