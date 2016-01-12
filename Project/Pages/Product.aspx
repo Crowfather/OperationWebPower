@@ -12,8 +12,7 @@
     <script type="text/javascript" src="../Scripts/Product.js"></script>
 </head>
 <body>
-
-<div id="fb-root"></div>
+    <div id="fb-root"></div>
     <script>        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -24,14 +23,14 @@
     </script>
 
     <div id="Div1"></div>
-<script>    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    } (document, 'script', 'facebook-jssdk'));
-</script>
+    <script>    (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.5";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));
+    </script>
     <form id="form1" runat="server">
         <div id="Container">
         <Top:TopMenu ID="TopMenu" runat="server" />
@@ -109,11 +108,7 @@
                                 <!-- Special case: rating and comments section cell -->
                                 <td>
                                     <div id="general_product_rating">
-                                        <!-- TODO: Add components for comments and rating here -->
-                                        <div runat=server
-                                                        
-                                        id="Comments" class="fb-comments">
-
+                                        <div runat="server" id="Comments" class="fb-comments"></div>
                                     </div>
                                 </td>
                             </tr>
@@ -121,12 +116,10 @@
                                 <!-- Special case: share section cell -->
                                 <td>
                                     <div id="general_product_share">
-
-                                         <div class="fb-share-button" data-href= "window.location.href" data-layout="button">
-                                         <!--<div class="fb-share-button" data-href="http://crowfather.imgur.com/all/" data-layout="button"> -->
-
                                         <!-- TODO: Add share components here -->
                                         <!-- TO CROW: Insert share stuff here! -->
+                                        <div class="fb-share-button" data-href= "window.location.href" data-layout="button"></div>
+                                        <!--<div class="fb-share-button" data-href="http://crowfather.imgur.com/all/" data-layout="button"> -->
                                     </div>
                                 </td>
                             </tr>

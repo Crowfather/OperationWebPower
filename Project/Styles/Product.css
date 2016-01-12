@@ -1,10 +1,5 @@
 ﻿/* General values to shrink tables and cells to the minimum fit over their content */
-table
-{
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
-}
+
 
 td
 {
@@ -53,6 +48,11 @@ h6
 #productsection_table {
     width: 100%;
     height: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-collapse: collapse;
 }
 
 #productsection_table tr {
@@ -69,8 +69,6 @@ h6
     width: 140px;
     height: 50px;
     
-    border-top: 2px;
-    border-left: 2px;
     border-right: 2px;
     border-style: solid;
     border-color: #203447;
@@ -100,7 +98,8 @@ h6
 
 #productsection_contentcell
 {
-    border: 2px solid #203447;
+    /*border: 2px solid #203447;*/
+    border-top: 2px solid #203447;
     background: #8DADE6;
     background: radial-gradient(#CFDBFF, #A4BFEC, #497CD7);
     vertical-align: top;
@@ -122,5 +121,5 @@ h6
 #Comments
 {
     data-width="100%";
-    data-numposts="5"    
+    data-numposts="5";
 }

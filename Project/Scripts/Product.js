@@ -21,6 +21,11 @@ window.onload = function()
     document.getElementById("productsection_tab_rating").onmouseout = tabReset;
     document.getElementById("productsection_tab_sysreq").onmouseout = tabReset;
     document.getElementById("productsection_tab_share").onmouseout = tabReset;
+
+    sectionsHide();
+    document.getElementById("general_product_logoimg").style.display = "inherit";
+    document.getElementById("general_product_title").style.display = "inherit";
+    document.getElementById("product_section_text").style.display = "inherit";
 }
 
 /* OnClick */
