@@ -78,7 +78,7 @@ namespace Project
         private void CreateCategoryTable(List<string> cats) {
             int i = 0;
 
-            if (CategoryMenu.Controls.Count > 0) {
+            if(CategoryMenu.Controls.Count > 0) {
                 CategoryMenu.Controls.Clear();
             }
             TableRow tr = null;
@@ -87,9 +87,9 @@ namespace Project
             //count++;
             //cats[0] = count.ToString();
 
-            for (i = 0; i < cats.Count; ++i) {
-                if ((i % 2) == 0) { //Every other
-                    if (tr != null) {
+            for(i = 0; i < cats.Count; ++i) {
+                if((i % 2) == 0) { //Every other
+                    if(tr != null) {
                         CategoryMenu.Controls.Add(tr); //Add filled row
                     }
                     tr = new TableRow();
@@ -106,7 +106,7 @@ namespace Project
                 hgc.InnerText = cats[i];
                 pan.Controls.Add(hgc);
                 //---X delete button---
-                if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                     Button btn = new Button();
                     btn.ID = "CategoryMenuCellDelBtn" + i;
                     btn.CssClass = "CategoryMenuCellDel";
@@ -127,7 +127,7 @@ namespace Project
                 td.Controls.Add(ha);
                 tr.Controls.Add(td);
             }
-            if (tr != null) { //Just incase it didnt loop
+            if(tr != null) { //Just incase it didnt loop
                 if((i % 2) != 0) { //Uneven -> Add extra empty cell (if not logged in as admin)
                     td = new TableCell();
                     td.CssClass = "CategoryMenuCell";
@@ -157,6 +157,24 @@ namespace Project
                 }
                 CategoryMenu.Controls.Add(tr); //Add the last row
             }
+
+            //---ADD +ADD BUTTON---
+            if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                //If logged in as admin -> add +ADD button
+                Button btn = new Button();
+                btn.ID = "CategoryMenuCellAdd";
+                btn.Text = "+";
+                btn.Click += AddClick;
+                //---Register Ajax trigger---
+                AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
+                trig.ControlID = btn.UniqueID;
+                trig.EventName = "Click";
+                UpdatePan.Triggers.Add(trig);
+                //---------------------------
+                //td.Controls.Add(btn);
+                MainContent.Controls.Add(btn);
+            }
+            //---------------------
         }
     }
 }

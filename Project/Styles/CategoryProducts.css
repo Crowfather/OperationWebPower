@@ -92,3 +92,16 @@
 .ProdsCatMenuCellDel:hover {
     background-color: pink;
 }
+
+#CategoryMenuCellAdd {
+    position: absolute;
+    top: 115px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 20%;
+    background-color: green;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
