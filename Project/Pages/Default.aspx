@@ -7,21 +7,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Project - Home</title>
-    <% if (DesignMode == true) { %>
-        <!-- To get CSS style of the topmenu to show up in Design/Split view here in VS -->
-        <!-- (Real CSS is included inside TopMenu.ascx !) -->
-        <link href="~/Styles/TopMenu.css" rel="stylesheet" type="text/css" />
-    <% } %>
-    <link href="Styles/PageLayout.css" rel="stylesheet" />
+    <link href="../Styles/PageLayout.css" rel="stylesheet" />
+    <link href="../Styles/Home.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div id="Container">
-        <Top:TopMenu runat="server" ID="TopMenu" />
+        <Top:TopMenu ID="TopMenu" runat="server" />
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            Home/News
+            <!-- Note: changing the id of this table will make it unreacable from the code-behind -->
+            <!-- If you change the id you are also responsible to update all references in the code-behind -->
+            <table id="containertable" runat="server">
+                <tr>
+                    <td>
+                        <asp:Table id="newstable" runat="server">
+                            <asp:TableRow>
+                                <asp:TableCell>
+                                    <!-- Dynamically filled with rows, columns and news content (see code-behind) -->
+                                </asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </td>
+                    <td id="containertable_fillercell_right">
+                        <!-- Right side filler -->
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     </form>
