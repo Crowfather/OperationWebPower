@@ -60,10 +60,7 @@
                                 <!-- Logotype image section cell -->
                                 <td>
                                     <div id="general_product_logoimg">
-                                        <!-- DATABASE: Fetch [currently selected product] logotype image from the database -->
-                                        <!-- NOTE: [currently selected product] is the product that is selected through category buttons; -->
-                                        <!-- the one that users are viewing and want information about right now -->
-                                        <img src="../Resources/Img/placeholder-logo.png" alt="Product Logo" />
+                                        <img id="databind_image" runat="server" src="../Resources/Img/placeholder-logo.png" alt="Product Logo" />
                                     </div>
                                 </td>
                             </tr>
@@ -71,8 +68,7 @@
                                 <!-- Title section cell -->
                                 <td>
                                     <div id="general_product_title">
-                                        <!-- DATABASE: Fetch [currently selected product] name from the database -->
-                                        <h1>Title</h1>
+                                        <h1 id="databind_title" runat="server">Title</h1>
                                     </div>
                                 </td>
                             </tr>
@@ -80,18 +76,15 @@
                                 <!-- Text sections cell -->
                                 <td>
                                     <div id="product_section_text">
-                                        <!-- DATABASE: Fetch [currently selected product] info text from the database -->
-                                        <h6>Product text.</h6>
+                                        <h6 id="databind_productText" runat="server">Product text.</h6>
                                     </div>
 
                                     <div id="content_section_text">
-                                        <!-- DATABASE: Fetch [currently selected product] content text from the database -->
-                                        <h6>Content text.</h6>
+                                        <h6 id="databind_contentText" runat="server">Content text.</h6>
                                     </div>
 
                                     <div id="sysreq_section_text">
-                                        <!-- DATABASE: Fetch [currently selected product] system requirements text from the database -->
-                                        <h6>System requirements.</h6>
+                                        <h6 id="databind_systemReq" runat="server">System requirements.</h6>
                                     </div>
                                 </td>
                             </tr>

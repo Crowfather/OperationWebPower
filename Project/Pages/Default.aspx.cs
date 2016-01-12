@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -15,11 +17,31 @@ public partial class _Default : System.Web.UI.Page {
 
     // Dynamically fills the news table.
     private void FillNewsTable() {
+
+        List<NewsItem> newsItems = null;
+
+        SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+        if (sqlconn != null) {
+
+            newsItems = DatabaseHelper.GetNews(sqlconn);
+
+            if (newsItems == null) {
+                // TODO handle error
+                newsItems = new List<NewsItem>();
+            }
+
+            DatabaseHelper.CloseDatabase(sqlconn);
+        }
+        else {
+            // TODO display database error
+        }
+        
+        
         // DATABASE: Assign this numberOfNews variable to a number fetched from the database (stored procedure that
         // keeps track of the number of news instances stored in the database?). Replace this hardcoded assignment
         int numberOfNews = 5;
 
-        for(int i = 0; i < numberOfNews; i++) {
+        for (int i = 0; i < newsItems.Count; i++) {
             // --- Declaration of table rows and cells for each part of this news instance --- //
 
             TableRow spacingRow = new TableRow();
@@ -44,19 +66,15 @@ public partial class _Default : System.Web.UI.Page {
             // DATABASE: Assign to an image text fetched from the database (note: this is the text that will show instead of
             // the image if the browser doesn't support the <img> tag)
             image.DescriptionUrl = "Image";
-            // DATABASE: Assign to an image url fetched from the database.
-            image.ImageUrl = "../Resources/Img/placeholder-logo.png";
+            
+            image.ImageUrl = newsItems[i].PicturePath;
             imageCell.Controls.Add(image);
 
             // - Title cell - //
-            // DATABASE: The second parameter, "Title ", should be the title of this news instance.
-            // It should be fetched from the database and replace this hardcoded string
-            InsertText(titleCell, "Title " + (i + 1).ToString(), "h3");
+            InsertText(titleCell, newsItems[i].Title, "h3");
 
             // - Text cell - //
-            // DATABASE: The second parameter, "News text ", should be the news text of this news instance.
-            // It should be fetched from the database and replace this hardcoded string
-            InsertText(textCell, "News text " + (i + 1).ToString() + ".", "h6");
+            InsertText(textCell, newsItems[i].Text, "h6");
 
             // - Divider cell - //
             dividerCell.BackColor = Color.FromArgb(67, 107, 145);

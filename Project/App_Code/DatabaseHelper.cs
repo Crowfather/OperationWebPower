@@ -281,4 +281,116 @@ public static class DatabaseHelper
             return false;
         }
     }
+
+    public static List<ProductCategoryItem> GetProductCategories(SqlConnection sqlconn, string mainCategoryName, string subCategoryName) {
+
+        SqlCommand query = new SqlCommand("proc_get_product_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
+
+        try {
+            List<ProductCategoryItem> list = new List<ProductCategoryItem>();
+
+            // Get the data
+            var reader = query.ExecuteReader();
+
+            while (reader.Read()) {
+                ProductCategoryItem product = new ProductCategoryItem(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4));
+
+                list.Add(product);
+            }
+
+            return list;
+        }
+        catch {
+            return null;
+        }
+    }
+
+
+
+
+
+
+    public static ProductItem GetProduct(SqlConnection sqlconn, string productName) {
+
+        ProductItem item = new ProductItem();
+
+        SqlCommand query = new SqlCommand("proc_get_product", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@productName", SqlDbType.VarChar);
+        query.Parameters["@productName"].Value = productName;
+
+        try {
+            // Get the data
+            var reader = query.ExecuteReader();
+
+            if (reader.Read()) {
+                item = new ProductItem(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5));
+            }
+
+            return item;
+        }
+        catch {
+            return item;
+        }
+    }
+
+    /////////
+    //News
+    /////////
+
+    public static List<NewsItem> GetNews(SqlConnection sqlconn) {
+        List<NewsItem> items = null;
+
+        SqlCommand query = new SqlCommand("proc_get_news", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        try {
+            items = new List<NewsItem>();
+
+            // Get the data
+            var reader = query.ExecuteReader();
+
+            while (reader.Read()) {
+                items.Add(new NewsItem(reader.GetString(1), reader.GetString(2), reader.GetString(3)));
+            }
+
+            return items;
+        }
+        catch {
+            return items;
+        }
+    }
+
+    public static bool AddNews(SqlConnection sqlconn, string title, string text, string picturePath) {
+        SqlCommand query = new SqlCommand("proc_add_news", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@title", SqlDbType.VarChar);
+        query.Parameters["@title"].Value = title;
+        query.Parameters.Add("@text", SqlDbType.VarChar);
+        query.Parameters["@text"].Value = text;
+        query.Parameters.Add("@picturePath", SqlDbType.VarChar);
+        query.Parameters["@picturePath"].Value = text;
+        
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch {
+            return false;
+        }
+    }
 }

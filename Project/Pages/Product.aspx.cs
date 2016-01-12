@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,9 +18,26 @@ namespace Project {
             //for test porpuse
             //face_share.Attributes["data-href"] = "http://imgur.com/gallery/topMQ";
             //face_share.Attributes["data-layout"] = "button";
-            
-            
+
+
             //twitter_dhare.Attributes["data-href"] = Request.Url.AbsoluteUri;
+
+            SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+            if (sqlconn != null) {
+
+                ProductItem item = DatabaseHelper.GetProduct(sqlconn, Request.QueryString["product"]);
+                
+                databind_title.InnerText = item.Title;
+                databind_image.Src = item.PicturePath;
+                databind_productText.InnerText = item.ProductText;
+                databind_contentText.InnerText = item.ContentText;
+                databind_systemReq.InnerText = item.SystemRequirementsText;
+
+                DatabaseHelper.CloseDatabase(sqlconn);
+            }
+            else {
+                // TODO display database error
+            }
         }
     }
 }
