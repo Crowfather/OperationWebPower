@@ -123,3 +123,12 @@ h6
     data-width="100%";
     data-numposts="5";
 }
+
+/* Hide elements at startup */
+#general_product_rating
+#general_product_share
+#content_section_text
+#sysreq_section_text
+{
+    display: none;
+}
