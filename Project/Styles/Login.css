@@ -1,0 +1,17 @@
+﻿/* NOTE: margin must be specified in the specific cases of h1, h2 etc. to space text rows */
+h3 {
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, Sans-Serif;
+    line-height: 0.0;
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    color: white;
+    text-shadow: 1px 1px 2px black; /* Not supported in the CSS 2.1 standard, but will show in most modern browsers. */
+}
+
+#MainContent input
+{
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
