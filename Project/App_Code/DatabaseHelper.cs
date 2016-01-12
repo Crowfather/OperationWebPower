@@ -57,23 +57,9 @@ public static class DatabaseHelper
         }
     }
 
-    /*
-    public static int addPreReq(SqlConnection sqlconn, string cc, string preReqcc) {
-        SqlCommand query = new SqlCommand("InsertCoursePreReqs", sqlconn);
-        query.Parameters.Add("@cc", SqlDbType.NChar);
-        query.Parameters["@cc"].Value = cc;
-        query.Parameters.Add("@preReqcc", SqlDbType.NChar);
-        query.Parameters["@preReqcc"].Value = preReqcc;
-        try {
-            query.CommandType = CommandType.StoredProcedure;
-            query.ExecuteNonQuery();
-            return 1;
-        }
-        catch {
-            return 0;
-        }
-    }
-    */
+    /////////
+    //User
+    /////////
 
     //Return 0 on failure
     //Return 1 on user login
@@ -95,7 +81,6 @@ public static class DatabaseHelper
             return 0;
         }
     }
-
 
     public static bool AddUser(SqlConnection sqlconn, string userName, string password) {
         SqlCommand query = new SqlCommand("proc_add_user", sqlconn);
@@ -134,6 +119,26 @@ public static class DatabaseHelper
         }
     }
 
+    /////////
+    //Category
+    /////////
+
+    // Check if the category exist
+    public static bool MainCategoryExist(SqlConnection sqlconn, string categoryName) {
+        SqlCommand query = new SqlCommand("SELECT dbo.func_main_category_exist(@categoryName)", sqlconn);
+        query.CommandType = CommandType.Text;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = categoryName;
+
+        try {
+            return (bool)query.ExecuteScalar();
+        }
+        catch {
+            return false;
+        }
+    }
+
     public static List<string> GetMainCategories(SqlConnection sqlconn) {
 
         SqlCommand query = new SqlCommand("proc_get_main_category", sqlconn);
@@ -153,6 +158,29 @@ public static class DatabaseHelper
         }
         catch {
             return null;
+        }
+    }
+
+    public static bool AddMainCategory(SqlConnection sqlconn, string mainCategoryName) {
+
+        SqlCommand query = new SqlCommand("proc_add_main_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch {
+            return false;
         }
     }
 
@@ -201,6 +229,31 @@ public static class DatabaseHelper
         }
         catch {
             return null;
+        }
+    }
+
+    public static bool AddSubCategory(SqlConnection sqlconn, string mainCategoryName, string subCategoryName) {
+
+        SqlCommand query = new SqlCommand("proc_add_sub_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
+
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch {
+            return false;
         }
     }
 

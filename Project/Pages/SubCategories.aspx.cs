@@ -63,9 +63,12 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
         (Registers as a trigger on the updatepanel (AJAX))
     */
     protected void AddClick(object sender, EventArgs e) {
+        string categoryName = Request.QueryString["category"];
 
-
-        UpdatePan.Update();
+        // Is a category specified ?
+        if (categoryName != null && categoryName.Length > 0) {
+            Response.Redirect("AddSubCategory.aspx?category=" + categoryName);
+        }
     }
 
     private void CreateSubCatTable(List<string> cats) {

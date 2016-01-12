@@ -70,9 +70,7 @@ namespace Project
             (Registers as a trigger on the updatepanel (AJAX))
         */
         protected void AddClick(object sender, EventArgs e) {
-
-
-            UpdatePan.Update();
+            Response.Redirect("AddCategory.aspx");
         }
 
         private void CreateCategoryTable(List<string> cats) {
