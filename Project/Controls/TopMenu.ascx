@@ -26,17 +26,17 @@
                             </a>
                         </td>
                         <td id="MenuCommunityCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Pages/Product.aspx") %>">
+                            <a href="">
                                 <div class="MenuCellDiv">Community</div>
                             </a>
                         </td>
                         <td id="MenuAboutUsCell" class="MenuCell">
-                            <a href="">
+                            <a href="<%= ResolveUrl("~/Pages/AboutUs.aspx") %>">
                                 <div class="MenuCellDiv">About Us</div>
                             </a>
                         </td>
                         <td id="MenuContactUsCell" class="MenuCell">
-                            <a href="">
+                            <a href="<%= ResolveUrl("~/Pages/ContactUs.aspx") %>">
                                 <div class="MenuCellDiv">Contact Us</div>
                             </a>
                         </td>
