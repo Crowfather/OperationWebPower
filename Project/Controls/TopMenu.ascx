@@ -50,7 +50,7 @@
         <table>
             <tr>
                 <td class="SubMenuCell">
-                    <a href="LoginPage.aspx">Login</a>
+                    <a href="<%= ResolveUrl("~/Pages/LoginPage.aspx") %>">Login</a>
                 </td>
                 <td class="SubMenuCell">
                     <a href="">Search...</a>
