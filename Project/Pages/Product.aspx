@@ -22,15 +22,6 @@
         } (document, 'script', 'facebook-jssdk'));
     </script>
 
-    <div id="Div1"></div>
-    <script>    (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.5";
-            fjs.parentNode.insertBefore(js, fjs);
-        } (document, 'script', 'facebook-jssdk'));
-    </script>
     <form id="form1" runat="server">
         <div id="Container">
         <Top:TopMenu ID="TopMenu" runat="server" />
@@ -105,7 +96,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <!-- Special case: rating and comments section cell -->
+                                <!-- Special case: rating and comments section cell
+                                    TODO: rating -->
                                 <td>
                                     <div id="general_product_rating">
                                         <div runat="server" id="Comments" class="fb-comments"></div>
@@ -118,8 +110,7 @@
                                     <div id="general_product_share">
                                         <!-- TODO: Add share components here -->
                                         <!-- TO CROW: Insert share stuff here! -->
-                                        <div class="fb-share-button" data-href= "window.location.href" data-layout="button"></div>
-                                        <!--<div class="fb-share-button" data-href="http://crowfather.imgur.com/all/" data-layout="button"> -->
+                                        <div runat = "server" id ="face_share" class="fb-share-button" data-layout="button_count"></div>
                                     </div>
                                 </td>
                             </tr>

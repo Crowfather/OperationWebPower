@@ -10,9 +10,16 @@ namespace Project {
         protected void Page_Load(object sender, EventArgs e) {
             //string meh = HttpContext.Current.Request.Url.AbsolutePath;
             //localhost:10881/Project/Pages/Product.aspx
-            string meh = Request.Url.AbsoluteUri;
+            //string meh = Request.Url.AbsoluteUri;
 
             Comments.Attributes["data-href"] = Request.Url.AbsoluteUri;
+            face_share.Attributes["data-href"] = Request.Url.AbsoluteUri;
+            //for test porpuse
+            //face_share.Attributes["data-href"] = "http://imgur.com/gallery/topMQ";
+            //face_share.Attributes["data-layout"] = "button";
+            
+            
+            //twitter_dhare.Attributes["data-href"] = Request.Url.AbsoluteUri;
         }
     }
 }
