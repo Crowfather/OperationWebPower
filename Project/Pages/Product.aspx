@@ -22,6 +22,24 @@
         } (document, 'script', 'facebook-jssdk'));
     </script>
 
+    <script>        
+            window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+
+            return t;
+        } (document, "script", "twitter-wjs"));</script>
+
     <form id="form1" runat="server">
         <div id="Container">
         <Top:TopMenu ID="TopMenu" runat="server" />
@@ -104,6 +122,17 @@
                                         <!-- TODO: Add share components here -->
                                         <!-- TO CROW: Insert share stuff here! -->
                                         <div runat = "server" id ="face_share" class="fb-share-button" data-layout="button_count"></div>
+                                        <div>
+                                            <a 
+                                            class="twitter-share-button"
+                                            href="https://twitter.com/intent/tweet"
+                                            data-via= "best produkt site ever"
+                                            data-size="large"
+                                            data-hashtags="best_site,best_products"
+                                            >
+                                            Tweet
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
