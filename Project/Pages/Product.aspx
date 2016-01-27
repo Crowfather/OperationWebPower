@@ -117,23 +117,34 @@
                             </tr>
                             <tr>
                                 <!-- Special case: share section cell -->
-                                <td>
+                                <td id = "share_cell">
                                     <div id="general_product_share">
-                                        <!-- TODO: Add share components here -->
-                                        <!-- TO CROW: Insert share stuff here! -->
-                                        <div runat = "server" id ="face_share" class="fb-share-button" data-layout="button_count"></div>
-                                        <div>
-                                            <a 
-                                            class="twitter-share-button"
-                                            href="https://twitter.com/intent/tweet"
-                                            data-via= "best produkt site ever"
-                                            data-size="large"
-                                            data-hashtags="best_site,best_products"
-                                            >
-                                            Tweet
-                                            </a>
-                                        </div>
+                                        <table id = "share_table">
+                                        <tr>
+                                        <td class = share_table_cell>
+                                            <!-- TODO: Add more share components here -->
+                                      
+                                            <div runat = "server" id ="face_share" class="fb-share-button" data-layout="button"></div>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td class = share_table_cell>
+                                            <div>
+                                                <a 
+                                                class="twitter-share-button"
+                                                href="https://twitter.com/intent/tweet"
+                                                data-via= "best produkt site ever"
+                                                data-size="large"
+                                                data-hashtags="best_site,best_products"
+                                                >
+                                                Tweet
+                                                </a>
+                                            </div>
+                                        </td>
+                                        </tr>
+                                        </table>
                                     </div>
+                                  
                                 </td>
                             </tr>
                         </table>

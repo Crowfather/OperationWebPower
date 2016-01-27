@@ -132,3 +132,12 @@ h6
 {
     display: none;
 }
+
+#share_table
+{
+    margin: 10px;    
+}
+#share_table_cell
+{
+    margin: 100px;
+}
