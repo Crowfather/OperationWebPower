@@ -1,5 +1,16 @@
-Home/News: Torran
-Category (Alla 3 sidor): Erik
-About Us: crow
-Contact Us: crow
-Login: 
+KVAR ATT FIXA TILL OSCAR:
+-------------------------
+Lägg till produkt funktion + sida -	R
+Editera produkt -			E(knapp)/R(funktionalitet + sida)
+Fixa gömma text på produkt sidan -	T
+Fixa text "design" -			T
+Lägga in OScars texter -		?
+Lägga in Loggan (resiza först) -	E
+Fixa in support för videos/YT i news -	T/E
+Flytta Databas & sida till webbhotell -	?
+Fixa in Admin kontot (Oscars) -		R
+Flytta login-knappen/länken? -		E
+Fixa mer Share? -			C
+Fixa Rating -				C
+Ta bort Search och Community-länkar? -	E
+
