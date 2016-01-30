@@ -10,15 +10,13 @@ public struct ProductItem
 {
 	string productName;
     string picturePath;
-    string title;
     string productText;
     string contentText;
     string systemRequirementsText;
 
-    public ProductItem(string productName, string picturePath, string title, string productText, string contentText, string systemRequirementsText) {
+    public ProductItem(string productName, string picturePath, string productText, string contentText, string systemRequirementsText) {
         this.productName = productName;
         this.picturePath = picturePath;
-        this.title = title;
         this.productText = productText;
         this.contentText = contentText;
         this.systemRequirementsText = systemRequirementsText;
@@ -39,15 +37,6 @@ public struct ProductItem
         }
         set {
             picturePath = value;
-        }
-    }
-
-    public string Title {
-        get {
-            return title;
-        }
-        set {
-            title = value;
         }
     }
 

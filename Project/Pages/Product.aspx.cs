@@ -27,11 +27,11 @@ namespace Project {
 
                 ProductItem item = DatabaseHelper.GetProduct(sqlconn, Request.QueryString["product"]);
                 
-                databind_title.InnerText = item.Title;
+                databind_title.InnerText = item.ProductName;
                 databind_image.Src = item.PicturePath;
                 databind_productText.InnerText = item.ProductText;
                 databind_contentText.InnerText = item.ContentText;
-                databind_systemReq.InnerText = item.SystemRequirementsText;
+                databind_systemReq.InnerHtml = item.SystemRequirementsText;
 
                 DatabaseHelper.CloseDatabase(sqlconn);
             }

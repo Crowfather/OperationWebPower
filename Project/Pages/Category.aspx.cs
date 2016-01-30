@@ -48,19 +48,20 @@ namespace Project
         protected void DelClick(object sender, EventArgs e) {
             //Remove category (get text of category associated with the pressed X-button)
             string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
-            cats.Remove(toremove);
             
-            CreateCategoryTable(cats);
-
             SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
             if (sqlconn != null) {
-                DatabaseHelper.RemoveMainCategory(sqlconn, toremove);
+                if (DatabaseHelper.RemoveMainCategory(sqlconn, toremove)) {
+                    cats.Remove(toremove);
+                }
 
                 DatabaseHelper.CloseDatabase(sqlconn);
             }
             else {
                 // TODO display database error
             }
+
+            CreateCategoryTable(cats);
 
             UpdatePan.Update();
         }

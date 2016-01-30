@@ -30,7 +30,7 @@
             <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click"/>
             <asp:Label ID="lLoginStatus" runat="server" Text="Wrong username or password" Visible="false"></asp:Label>
             <br />
-            <asp:Button ID="btdDebugLoginu" runat="server" Text="DEBUGLOGOUT!!!!" CausesValidation="false" OnClick="btdDebugLoginu_Click"/>
+            <asp:Button ID="btdDebugLoginu" runat="server" Text="Logout" CausesValidation="false" OnClick="btdDebugLoginu_Click"/>
         </div>
     </div>
     </form>

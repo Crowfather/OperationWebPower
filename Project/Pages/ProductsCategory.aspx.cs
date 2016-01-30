@@ -7,14 +7,15 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class Pages_ProductsCategory : System.Web.UI.Page {
+public partial class Pages_ProductsCategory : System.Web.UI.Page
+{
     //private static string[] productcat = { "SolidWorks", "Firefox", "Chrome", "Photoshop", "Visual Studio", "GIMP", "Notepad", "Skype" };
     //private static List<string> cats;
 
     private static List<ProductCategoryItem> categories;
 
     protected void Page_Load(object sender, EventArgs e) {
-        if(!IsPostBack) {
+        if (!IsPostBack) {
             //MainContent.InnerText = "Products --- Category: " + Request.QueryString["category"] + " --- SubCat: " + Request.QueryString["subcat"];
 
             categories = new List<ProductCategoryItem>();
@@ -44,20 +45,34 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
     */
     protected void DelClick(object sender, EventArgs e) {
         //Remove category (get text of category associated with the pressed X-button)
-        string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
+
+        string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[1]).InnerText;
         
-        //cats.Remove(toremove);
-        CreateProdsCatTable(categories);
-
-        /*SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+        SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
         if (sqlconn != null) {
-            DatabaseHelper.RemoveMainCategory(sqlconn, toremove);
+            string categoryName = Request.QueryString["category"];
+            string subCategoryName = Request.QueryString["subcat"];
 
+            // Is a category specified ?
+            if (categoryName != null && categoryName.Length > 0 && subCategoryName != null && subCategoryName.Length > 0) {
+                if (DatabaseHelper.RemoveProductCategory(sqlconn, categoryName, subCategoryName, toremove)) {
+
+                    for (int i = 0; i < categories.Count; i++)
+                    {
+                        if(categories[i].ProductName.Equals(toremove)) {
+                            categories.RemoveAt(i);
+                            break;
+                        }
+                    }
+                }
+            }
             DatabaseHelper.CloseDatabase(sqlconn);
         }
         else {
             // TODO display database error
-        }*/
+        }
+
+        CreateProdsCatTable(categories);
 
         UpdatePan.Update();
     }
@@ -69,14 +84,20 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
     */
     protected void AddClick(object sender, EventArgs e) {
 
-        UpdatePan.Update();
+        string categoryName = Request.QueryString["category"];
+        string subCategoryName = Request.QueryString["subcat"];
+
+        // Is a category specified ?
+        if (categoryName != null && categoryName.Length > 0) {
+            Response.Redirect("AddProductCategory.aspx?category=" + categoryName + "&" + "subcat=" + subCategoryName);
+        }
     }
 
     private void CreateProdsCatTable(List<ProductCategoryItem> cats) {
-        
+
         int i = 0;
 
-        if(ProdsCatMenu.Controls.Count > 0) {
+        if (ProdsCatMenu.Controls.Count > 0) {
             ProdsCatMenu.Controls.Clear();
         }
         TableRow tr = null;
@@ -86,8 +107,8 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
         //cats[0] = count.ToString();
 
         for (i = 0; i < categories.Count; ++i) {
-            if((i % 4) == 0) { //Every other
-                if(tr != null) {
+            if ((i % 4) == 0) { //Every other
+                if (tr != null) {
                     ProdsCatMenu.Controls.Add(tr); //Add filled row
                 }
                 tr = new TableRow();
@@ -98,7 +119,7 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
             ha.ID = "ProdsCatMenuCellA" + i;
             //ha.HRef = "./Categories/" + cats[i] + ".aspx";
             //ha.HRef = "ProductsCategory.aspx?category=" + Request.QueryString["category"] + "&subcat=" + cats[i];
-            ha.HRef = "Product.aspx?category=" + Request.QueryString["category"] + "&subcat=" + Request.QueryString["subcat"] + "&product=" + cats[i].ProductName;
+            ha.HRef = "Product.aspx?product=" + cats[i].ProductName;
             Panel pan = new Panel();
             pan.CssClass = "ProdsCatMenuCellDiv";
             Image img = new Image();
@@ -108,13 +129,13 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
             hgc.InnerText = cats[i].ProductName;
             pan.Controls.Add(hgc);
             HtmlGenericControl hgc2 = new HtmlGenericControl("h2");
-            
+
             hgc2.InnerText = cats[i].Description;
- 
+
             //---------------------------
             pan.Controls.Add(hgc2);
             //---X delete button---
-            if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+            if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                 Button btn = new Button();
                 btn.ID = "ProdsCatMenuCellDelBtn" + i;
                 btn.CssClass = "ProdsCatMenuCellDel";
@@ -135,8 +156,8 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
             td.Controls.Add(ha);
             tr.Controls.Add(td);
         }
-        if(tr != null) { //Just incase it didnt loop
-            while((i % 4) != 0) { //Not an even 4 row -> Add extra empty cell(s)
+        if (tr != null) { //Just incase it didnt loop
+            while ((i % 4) != 0) { //Not an even 4 row -> Add extra empty cell(s)
                 td = new TableCell();
                 td.CssClass = "ProdsCatMenuCell";
                 tr.Controls.Add(td);
@@ -144,5 +165,16 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page {
             }
             ProdsCatMenu.Controls.Add(tr); //Add the last row
         }
+
+        //---ADD +ADD BUTTON---
+        if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+            //If logged in as admin -> add +ADD button
+            Button btn = new Button();
+            btn.ID = "CategoryMenuCellAdd";
+            btn.Text = "+";
+            btn.Click += AddClick;
+            MainContent.Controls.Add(btn);
+        }
+        //---------------------
     }
 }

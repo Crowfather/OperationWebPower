@@ -9,15 +9,11 @@ using System.Web;
 public struct ProductCategoryItem
 {
     string productName;
-    string subCategoryName;
-    string categoryName;
     string picturePath;
     string description;
 
-    public ProductCategoryItem(string productName, string subCategoryName, string categoryName, string picturePath, string description) {
+    public ProductCategoryItem(string productName, string picturePath, string description) {
         this.productName = productName;
-        this.subCategoryName = subCategoryName;
-        this.categoryName = categoryName;
         this.picturePath = picturePath;
         this.description = description;
     }
@@ -28,25 +24,6 @@ public struct ProductCategoryItem
         }
         set {
             productName = value;
-        }
-    }
-
-    public string SubCategoryName {
-        get {
-            return subCategoryName;
-        }
-        set {
-            subCategoryName = value;
-        }
-    }
-
-
-    public string CategoryName {
-        get {
-            return categoryName;
-        }
-        set {
-            categoryName = value;
         }
     }
 

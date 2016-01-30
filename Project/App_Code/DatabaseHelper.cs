@@ -299,7 +299,7 @@ public static class DatabaseHelper
             var reader = query.ExecuteReader();
 
             while (reader.Read()) {
-                ProductCategoryItem product = new ProductCategoryItem(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4));
+                ProductCategoryItem product = new ProductCategoryItem(reader.GetString(0), reader.GetString(1), reader.GetString(2));
 
                 list.Add(product);
             }
@@ -311,9 +311,87 @@ public static class DatabaseHelper
         }
     }
 
+    public static List<String> GetProductsNotInCategory(SqlConnection sqlconn, string mainCategoryName, string subCategoryName) {
 
+        SqlCommand query = new SqlCommand("proc_get_products_not_in_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
 
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
 
+        try {
+            List<String> list = new List<String>();
+
+            // Get the data
+            var reader = query.ExecuteReader();
+
+            while (reader.Read()) {
+                list.Add(reader.GetString(0));
+            }
+
+            return list;
+        }
+        catch {
+            return null;
+        }
+    }
+
+    public static bool AddProductCategory(SqlConnection sqlconn, string mainCategoryName, string subCategoryName, string productName) {
+        SqlCommand query = new SqlCommand("proc_add_product_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
+        query.Parameters.Add("@productName", SqlDbType.VarChar);
+        query.Parameters["@productName"].Value = productName;
+
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            } 
+        }
+        catch {
+            return false;
+        }
+    }
+
+    public static bool RemoveProductCategory(SqlConnection sqlconn, string mainCategoryName, string subCategoryName, string productName) {
+
+        SqlCommand query = new SqlCommand("proc_remove_product_category", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@categoryName", SqlDbType.VarChar);
+        query.Parameters["@categoryName"].Value = mainCategoryName;
+        query.Parameters.Add("@subCategoryName", SqlDbType.VarChar);
+        query.Parameters["@subCategoryName"].Value = subCategoryName;
+        query.Parameters.Add("@productName", SqlDbType.VarChar);
+        query.Parameters["@productName"].Value = productName;
+        
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            } 
+        }
+        catch {
+            return false;
+        }
+    }
+
+   
 
 
     public static ProductItem GetProduct(SqlConnection sqlconn, string productName) {
@@ -331,13 +409,34 @@ public static class DatabaseHelper
             var reader = query.ExecuteReader();
 
             if (reader.Read()) {
-                item = new ProductItem(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5));
+                item = new ProductItem(reader.GetString(0), reader.GetString(1), reader.GetString(3), reader.GetString(4), reader.GetString(5));
             }
 
             return item;
         }
         catch {
             return item;
+        }
+    }
+
+    public static List<string> GetProductNames(SqlConnection sqlconn) {
+        SqlCommand query = new SqlCommand("proc_get_product_names", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        try {
+            List<string> list = new List<string>();
+
+            // Get the data
+            var reader = query.ExecuteReader();
+
+            while (reader.Read()) {
+                list.Add(reader.GetString(0));
+            }
+
+            return list;
+        }
+        catch {
+            return null;
         }
     }
 

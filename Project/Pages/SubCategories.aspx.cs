@@ -41,11 +41,12 @@ public partial class Pages_Categories_SubCategories : System.Web.UI.Page {
     protected void DelClick(object sender, EventArgs e) {
         //Remove category (get text of category associated with the pressed X-button)
         string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
-        cats.Remove(toremove);
-
+        
         SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
         if (sqlconn != null) {
-            DatabaseHelper.RemoveSubCategory(sqlconn, Request.QueryString["category"], toremove);
+            if (DatabaseHelper.RemoveSubCategory(sqlconn, Request.QueryString["category"], toremove)) {
+                cats.Remove(toremove);
+            }
 
             DatabaseHelper.CloseDatabase(sqlconn);
         }
