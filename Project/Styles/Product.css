@@ -125,9 +125,9 @@ h6
 }
 
 /* Hide elements at startup */
-#general_product_rating
-#general_product_share
-#content_section_text
+#general_product_rating,
+#general_product_share,
+#content_section_text,
 #sysreq_section_text
 {
     display: none;
