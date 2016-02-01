@@ -10,7 +10,7 @@ td
 {
     border: 0px;
     margin: 0px;
-	  padding: 0px;
+	padding: 0px;
 }
 
 /* NOTE: margin must be specified in the specific cases of h1, h2 etc. to space text rows */
@@ -62,6 +62,7 @@ h6
 {
     /* background: #8DADE6; */
     /* background: radial-gradient(#CFDBFF, #A4BFEC, #497CD7); */
+    width: 100%;
 }
 
 #newstable

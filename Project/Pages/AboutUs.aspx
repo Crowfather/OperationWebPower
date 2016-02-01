@@ -17,9 +17,11 @@
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            <h1>Oscar Wahlström</h1>
+            <div id="ImageDiv">
+                <img id="GearCommunityImg" src="<%= ResolveUrl("~/Resources/Img/GearCommunity75PercentSize.png") %>" alt="About Gear Community" />
+            </div>
             <p>
-                1990. Eskilstuna. Student.
+                Gear Community gathers all software’s in all categories to simplify that you find what you are looking for. It does not matter how old you are or how much experience you have, Gear Community have everything fit just for you. It is never too late to learn something, Gear Community helps you to find what you are looking for quickly without you having to search for hours online in vain. Fast, easy and costs nothing. If there are any questions or if there is something that you think is missing so do not be afraid to get in touch with us.
             </p>
         </div>
     </div>

@@ -1,7 +1,15 @@
-﻿#MainContent h1 {
+﻿body {
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, Sans-Serif;
+}
+
+#MainContent h1 {
     margin-left: 10px;
 }
 
 #MainContent p {
     margin-left: 10px;
+}
+
+#GearCommunityImg {
+    margin: 10px;
 }

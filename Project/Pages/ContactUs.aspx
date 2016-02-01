@@ -17,9 +17,12 @@
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            <h1>Mail</h1>
+            <img id="GearCommunityImg" src="<%= ResolveUrl("~/Resources/Img/GearCommunity75PercentSize.png") %>" alt="Contact us" />
             <p>
-                <a href="mailto:owm14002@student.mdh.se?Subject=Gearcommunity%20Feedback">Send Mail</a>
+                If you have questions, if you think something is missing or if something is wrong with the website, please contact our support: 
+            </p>
+            <p>
+                <a href="mailto:Support@gearcommunity.org?Subject=Gearcommunity%20Feedback">Support@gearcommunity.org</a>
             </p>
         </div>
     </div>

@@ -8,15 +8,15 @@
         <tr>
             <td id="TopOuterFillerLeft"></td>
             <td>
-                <a href="<%= ResolveUrl("~/Pages/Default.aspx") %>">
-                    <img id="MenuLogo" src="<%= ResolveUrl("~/Resources/Img/logo.png") %>" alt="Logo" />
+                <a href="<%= ResolveUrl("~/Default.aspx") %>">
+                    <img id="MenuLogo" src="<%= ResolveUrl("~/Resources/Img/Gear1.png") %>" alt="Logo" />
                 </a>
             </td>
             <td>
                 <table id="MenuTable">
                     <tr id="MenuRow">
                         <td id="MenuHomeCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Pages/Default.aspx") %>">
+                            <a href="<%= ResolveUrl("~/Default.aspx") %>">
                                 <div class="MenuCellDiv">Home</div>
                             </a>
                         </td>
@@ -25,11 +25,11 @@
                                 <div class="MenuCellDiv">Category</div>
                             </a>
                         </td>
-                        <td id="MenuCommunityCell" class="MenuCell">
+                        <%-- <td id="MenuCommunityCell" class="MenuCell">
                             <a href="">
                                 <div class="MenuCellDiv">Community</div>
                             </a>
-                        </td>
+                        </td> --%>
                         <td id="MenuAboutUsCell" class="MenuCell">
                             <a href="<%= ResolveUrl("~/Pages/AboutUs.aspx") %>">
                                 <div class="MenuCellDiv">About Us</div>
@@ -46,7 +46,7 @@
             <td id="TopOuterFillerRight"></td>
         </tr>
     </table>
-    <div id="SubMenu">
+    <%-- <div id="SubMenu">
         <table>
             <tr>
                 <td class="SubMenuCell">
@@ -57,5 +57,5 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div> --%>
 </asp:Panel>

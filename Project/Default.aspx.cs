@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -15,11 +17,31 @@ public partial class _Default : System.Web.UI.Page {
 
     // Dynamically fills the news table.
     private void FillNewsTable() {
+
+        List<NewsItem> newsItems = null;
+
+        SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+        if (sqlconn != null) {
+
+            newsItems = DatabaseHelper.GetNews(sqlconn);
+
+            if (newsItems == null) {
+                // TODO handle error
+                newsItems = new List<NewsItem>();
+            }
+
+            DatabaseHelper.CloseDatabase(sqlconn);
+        }
+        else {
+            // TODO display database error
+        }
+        
+        
         // DATABASE: Assign this numberOfNews variable to a number fetched from the database (stored procedure that
         // keeps track of the number of news instances stored in the database?). Replace this hardcoded assignment
         int numberOfNews = 5;
 
-        for(int i = 0; i < numberOfNews; i++) {
+        for (int i = 0; i < newsItems.Count; i++) {
             // --- Declaration of table rows and cells for each part of this news instance --- //
 
             TableRow spacingRow = new TableRow();
@@ -40,23 +62,28 @@ public partial class _Default : System.Web.UI.Page {
             InsertText(spacingCell, "<br />", "h6");
 
             // - Image cell - //
-            System.Web.UI.WebControls.Image image = new System.Web.UI.WebControls.Image();
+            /*System.Web.UI.WebControls.Image image = new System.Web.UI.WebControls.Image();
             // DATABASE: Assign to an image text fetched from the database (note: this is the text that will show instead of
             // the image if the browser doesn't support the <img> tag)
             image.DescriptionUrl = "Image";
-            // DATABASE: Assign to an image url fetched from the database.
-            image.ImageUrl = "../Resources/Img/placeholder-logo.png";
-            imageCell.Controls.Add(image);
+            
+            image.ImageUrl = FixPath(newsItems[i].PicturePath);*/
+            object imgvid = GetImgVid(FixPath(newsItems[i].PicturePath));
+            //object imgvid = GetImgVid(FixPath("../Resources/Img/Gear1.png"));
+            //object imgvid = GetImgVid(FixPath("../Resources/Vid/vader.webm"));
+            //object imgvid = GetImgVid(FixPath("https://www.youtube.com/watch?v=ytU7kgiqp1s"));
+            //object imgvid = GetImgVid(FixPath("https://youtu.be/ytU7kgiqp1s"));
+            if (imgvid is System.Web.UI.WebControls.Image) {
+                imageCell.Controls.Add((System.Web.UI.WebControls.Image)imgvid);
+            }
+            else if (imgvid is LiteralControl) { imageCell.Controls.Add((LiteralControl)imgvid); }
+            //imageCell.Controls.Add(image);
 
             // - Title cell - //
-            // DATABASE: The second parameter, "Title ", should be the title of this news instance.
-            // It should be fetched from the database and replace this hardcoded string
-            InsertText(titleCell, "Title " + (i + 1).ToString(), "h3");
+            InsertText(titleCell, newsItems[i].Title, "h3");
 
             // - Text cell - //
-            // DATABASE: The second parameter, "News text ", should be the news text of this news instance.
-            // It should be fetched from the database and replace this hardcoded string
-            InsertText(textCell, "News text " + (i + 1).ToString() + ".", "h6");
+            InsertText(textCell, newsItems[i].Text, "h6");
 
             // - Divider cell - //
             dividerCell.BackColor = Color.FromArgb(67, 107, 145);
@@ -80,7 +107,7 @@ public partial class _Default : System.Web.UI.Page {
             newstable.Rows.Add(textRow);
             textRow.Cells.Add(textCell);
             // Divider (special case: no divider in the last (bottom) news instance)
-            if((i + 1) != numberOfNews) {
+            if((i + 1) != newsItems.Count /*numberOfNews*/) {
                 newstable.Rows.Add(dividerRow);
                 dividerRow.Cells.Add(dividerCell);
             }
@@ -96,5 +123,88 @@ public partial class _Default : System.Web.UI.Page {
     // site elements.
     private string CreateText(string text, string textTag) {
         return "<" + textTag + ">" + text + "</" + textTag + ">";
+    }
+
+    //TEMPFIX: Removes ../ from imagepaths
+    private string FixPath(string path)
+    {
+        string ret;
+
+        if (path.StartsWith("../"))
+        {
+            ret = path.Substring(3);
+        }
+        else { ret = path; }
+
+        return ret;
+    }
+
+    private object GetImgVid(string path)
+    {
+        object ret = GetVideo(path);
+        if (ret == null) { ret = GetEmbeddedYTVideo(path); }
+        if (ret == null) { ret = GetImage(path); } //Image last -> if not video or YT and errorneous path then there will atleast be the alt. text from the img-element!
+
+        return ret;
+    }
+
+    private System.Web.UI.WebControls.Image GetImage(string path)
+    {
+        if (path != "")
+        {
+            System.Web.UI.WebControls.Image image = new System.Web.UI.WebControls.Image();
+            //image.CssClass = "";
+            image.AlternateText = "News image";
+            image.ImageUrl = path;
+            image.Visible = true;
+
+            return image;
+        }
+
+        return null;
+    }
+
+    private LiteralControl GetVideo(string path)
+    {
+        switch (System.IO.Path.GetExtension(path))
+        {
+            case ".AVI":
+            case ".avi":
+            case ".MOV":
+            case ".mov":
+            case ".mp4":
+            case ".MPEG":
+            case ".mpeg":
+            case ".MPG":
+            case ".mpg":
+            case ".webm":
+            case ".WEBM":
+                return new LiteralControl("<video width=\"350\" height=\"250\" controls><source src=\"" + path + "\">News video</video>");
+        }
+
+        return null;
+    }
+    
+    private LiteralControl GetEmbeddedYTVideo(string path)
+    {
+        //HTML format
+        /* <iframe width="420" height="315"
+        src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1">
+        </iframe> */
+        //<iframe width="854" height="480" src="https://www.youtube.com/embed/ytU7kgiqp1s" frameborder="0" allowfullscreen></iframe>
+        
+        //YT Link Formats:
+        //https://www.youtube.com/watch?v=ytU7kgiqp1s
+        //https://youtu.be/ytU7kgiqp1s
+        
+        if(path.Contains(".com")) {
+            return new LiteralControl("<iframe width=\"350\" height=\"250\" src=\"https://www.youtube.com/embed/" + path.Substring(path.IndexOf("?v=")).Replace("?v=", "") + "\"></iframe>");
+        }
+        else if (path.Contains(".be"))
+        {
+            return new LiteralControl("<iframe width=\"350\" height=\"250\" src=\"https://www.youtube.com/embed/" + path.Substring(path.LastIndexOf("/")) + "\"></iframe>");
+        }
+
+        return null;
     }
 }

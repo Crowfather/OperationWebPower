@@ -17,7 +17,7 @@
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            <!-- Note: changing the id of this table will make it unreacable from the code-behind -->
+            <!-- Note: changing the id of this table will make it unreachable from the code-behind -->
             <!-- If you change the id you are also responsible to update all references in the code-behind -->
             <table id="containertable" runat="server">
                 <tr>
@@ -30,9 +30,9 @@
                             </asp:TableRow>
                         </asp:Table>
                     </td>
-                    <td id="containertable_fillercell_right">
+                    <%-- <td id="containertable_fillercell_right">
                         <!-- Right side filler -->
-                    </td>
+                    </td> --%>
                 </tr>
             </table>
         </div>
