@@ -2,7 +2,6 @@ KVAR ATT FIXA TILL OSCAR:
 -------------------------
 Lägg till produkt funktion + sida -	R
 Editera produkt -			E(knapp)/R(funktionalitet + sida)
-Fixa gömma text på produkt sidan -	T
 Fixa text "design" -			T
 Lägga in OScars texter -		?
 Fixa in support för videos/YT i news -	T/E
