@@ -1,16 +1,13 @@
 KVAR ATT FIXA TILL OSCAR:
 -------------------------
-Lägg till produkt funktion + sida -	R
+LÃ¤gg till produkt funktion + sida -	R
 Editera produkt -			E(knapp)/R(funktionalitet + sida)
-Fixa gömma text på produkt sidan -	T
+Fixa gÃ¶mma text pÃ¥ produkt sidan -	T
 Fixa text "design" -			T
-Lägga in OScars texter -		?
-Lägga in Loggan (resiza först) -	E
-Fixa in support för videos/YT i news -	T/E
+LÃ¤gga in OScars texter -		?
+Fixa in support fÃ¶r videos/YT i news -	T/E
 Flytta Databas & sida till webbhotell -	?
 Fixa in Admin kontot (Oscars) -		R
-Flytta login-knappen/länken? -		E
 Fixa mer Share? -			C
 Fixa Rating -				C
-Ta bort Search och Community-länkar? -	E
-
+Fixa in LÃ¤gg till, Ta bort & Edit news - T/E/R
