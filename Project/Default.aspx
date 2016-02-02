@@ -21,6 +21,11 @@
             <!-- If you change the id you are also responsible to update all references in the code-behind -->
             <table id="containertable" runat="server">
                 <tr>
+                    <td id="gearcommunityimagecell">
+                        <img src="../Resources/Img/GearCommunity75PercentSize.png" alt="Gear Community" />
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <asp:Table id="newstable" runat="server">
                             <asp:TableRow>
