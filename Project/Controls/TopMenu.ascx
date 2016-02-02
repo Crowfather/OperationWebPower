@@ -8,7 +8,8 @@
         <tr>
             <td id="TopOuterFillerLeft"></td>
             <td>
-                <a href="<%= ResolveUrl("~/Default.aspx") %>">
+                <%-- <a href="<%= ResolveUrl("~/Default.aspx") %>"> --%>
+                <a href="Default.aspx">
                     <img id="MenuLogo" src="<%= ResolveUrl("~/Resources/Img/Gear1.png") %>" alt="Logo" />
                 </a>
             </td>
@@ -16,12 +17,14 @@
                 <table id="MenuTable">
                     <tr id="MenuRow">
                         <td id="MenuHomeCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Default.aspx") %>">
+                            <%-- <a href="<%= ResolveUrl("~/Default.aspx") %>"> --%>
+                            <a href="Default.aspx">
                                 <div class="MenuCellDiv">Home</div>
                             </a>
                         </td>
                         <td id="MenuCategoryCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Pages/Category.aspx") %>">
+                            <%-- <a href="<%= ResolveUrl("~/Pages/Category.aspx") %>"> --%>
+                            <a href="Category.aspx">
                                 <div class="MenuCellDiv">Category</div>
                             </a>
                         </td>
@@ -31,12 +34,14 @@
                             </a>
                         </td> --%>
                         <td id="MenuAboutUsCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Pages/AboutUs.aspx") %>">
+                            <%-- <a href="<%= ResolveUrl("~/Pages/AboutUs.aspx") %>"> --%>
+                            <a href="AboutUs.aspx">
                                 <div class="MenuCellDiv">About Us</div>
                             </a>
                         </td>
                         <td id="MenuContactUsCell" class="MenuCell">
-                            <a href="<%= ResolveUrl("~/Pages/ContactUs.aspx") %>">
+                            <%--<a href="<%= ResolveUrl("~/Pages/ContactUs.aspx") %>"> --%>
+                            <a href="ContactUs.aspx">
                                 <div class="MenuCellDiv">Contact Us</div>
                             </a>
                         </td>
