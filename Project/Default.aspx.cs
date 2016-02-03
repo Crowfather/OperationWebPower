@@ -115,7 +115,7 @@ public partial class _Default : System.Web.UI.Page {
             if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
                 //Del button
                 Button btn = new Button();
-                btn.ID = "NewsDelBtn" + i; //STOPPA IN NEWS-ID HÄR!!!!!
+                btn.ID = "NewsDelBtn" + i; //ERSÄTT i MED NEWS-ID HÄR!!!!!
                 btn.CssClass = "NewsDel";
                 btn.Text = "X";
                 btn.Click += DelClick;
@@ -131,7 +131,7 @@ public partial class _Default : System.Web.UI.Page {
 
                 //Edit button
                 btn = new Button();
-                btn.ID = "NewsEditBtn" + i; //STOPPA IN NEWS-ID HÄR!!!!!
+                btn.ID = "NewsEditBtn" + i; //ERSÄTT i MED NEWS-ID HÄR!!!!!
                 btn.CssClass = "NewsEdit";
                 btn.Text = "EDIT";
                 btn.Click += EditClick;
