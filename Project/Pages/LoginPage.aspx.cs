@@ -39,7 +39,7 @@ public partial class Pages_LoginPage : System.Web.UI.Page
                     }
                     
                     DatabaseHelper.CloseDatabase(sqlconn);
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
                 }
                 else {
                     // Tell the user that username or password is wrong
@@ -56,6 +56,6 @@ public partial class Pages_LoginPage : System.Web.UI.Page
         Session.Add("UserLogedIn", false);
         Session.Add("Username", "");
         Session.Add("Admin", false);
-        Response.Redirect("Default.aspx");
+        Response.Redirect("../Default.aspx");
     }
 }

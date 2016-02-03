@@ -10,7 +10,7 @@ td
 {
     border: 0px;
     margin: 0px;
-	padding: 0px;
+    padding: 0px;
 }
 
 /* NOTE: margin must be specified in the specific cases of h1, h2 etc. to space text rows */
@@ -67,7 +67,13 @@ h6
 
 #gearcommunityimagecell
 {
+    position: relative;
     padding: 10px;
+}
+
+#newstable
+{
+    margin: 10px;
 }
 
 #newstable
@@ -78,4 +84,50 @@ h6
 #containertable_fillercell_right
 {
     width: 100%;
+}
+
+.NewsImage 
+{
+    position: relative;
+}
+
+.NewsDel {
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    width: 25px;
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.NewsEdit 
+{
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    width: 50px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 20%;
+    background-color: Blue;
+    font-size: 16px;
+    font-weight: bold;
+    color: White;
+}
+
+#NewsAdd {
+    position: absolute;
+    top: 85px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 20%;
+    background-color: green;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
 }

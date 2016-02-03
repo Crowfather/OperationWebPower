@@ -47,7 +47,7 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
         //Remove category (get text of category associated with the pressed X-button)
 
         string toremove = ((HtmlGenericControl)((Button)sender).Parent.Controls[1]).InnerText;
-        
+
         SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
         if (sqlconn != null) {
             string categoryName = Request.QueryString["category"];
@@ -78,10 +78,7 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
     }
 
 
-    /*
-        The function called by the Add-button.
-        (Registers as a trigger on the updatepanel (AJAX))
-    */
+    //The function called by the Add-button.
     protected void AddClick(object sender, EventArgs e) {
 
         string categoryName = Request.QueryString["category"];
@@ -91,6 +88,14 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
         if (categoryName != null && categoryName.Length > 0) {
             Response.Redirect("AddProductCategory.aspx?category=" + categoryName + "&" + "subcat=" + subCategoryName);
         }
+    }
+
+    //The function called by the Edit-button
+    protected void EditClick(object sender, EventArgs e)
+    {
+        //Get category (get text of category associated with the pressed Edit-button)
+        string toedit = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
+
     }
 
     private void CreateProdsCatTable(List<ProductCategoryItem> cats) {
@@ -107,7 +112,7 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
         //cats[0] = count.ToString();
 
         for (i = 0; i < categories.Count; ++i) {
-            if ((i % 4) == 0) { //Every other
+            if ((i % 4) == 0) { //4 per row
                 if (tr != null) {
                     ProdsCatMenu.Controls.Add(tr); //Add filled row
                 }
@@ -150,6 +155,14 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
                 UpdatePan.Triggers.Add(trig);
                 //---------------------------
                 pan.Controls.Add(btn);
+                //---Edit button---
+                btn = new Button();
+                btn.ID = "CategoryMenuCellEditBtn" + i;
+                btn.CssClass = "CategoryMenuCellEdit";
+                btn.Text = "EDIT";
+                btn.Click += EditClick;
+                pan.Controls.Add(btn);
+                //-----------------
             }
             //---------------------
             ha.Controls.Add(pan);

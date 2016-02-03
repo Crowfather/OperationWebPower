@@ -60,17 +60,24 @@ namespace Project
             else {
                 // TODO display database error
             }
-
+            
             CreateCategoryTable(cats);
 
             UpdatePan.Update();
         }
 
-        /*
-            The function called by the Add-button.
-        */
+        //The function called by the Add-button.
         protected void AddClick(object sender, EventArgs e) {
             Response.Redirect("AddCategory.aspx");
+        }
+
+        //The function called by the Edit-button
+        protected void EditClick(object sender, EventArgs e)
+        {
+            //Get category (get text of category associated with the pressed Edit-button)
+            string toedit = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
+            
+            
         }
 
         private void CreateCategoryTable(List<string> cats) {
@@ -105,8 +112,8 @@ namespace Project
                 HtmlGenericControl hgc = new HtmlGenericControl("h1");
                 hgc.InnerText = cats[i];
                 pan.Controls.Add(hgc);
-                //---X delete button---
                 if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                    //---X delete button---
                     Button btn = new Button();
                     btn.ID = "CategoryMenuCellDelBtn" + i;
                     btn.CssClass = "CategoryMenuCellDel";
@@ -120,8 +127,16 @@ namespace Project
                     UpdatePan.Triggers.Add(trig);
                     //---------------------------
                     pan.Controls.Add(btn);
+                    //---------------------
+                    //---Edit button---
+                    btn = new Button();
+                    btn.ID = "CategoryMenuCellEditBtn" + i;
+                    btn.CssClass = "CategoryMenuCellEdit";
+                    btn.Text = "EDIT";
+                    btn.Click += EditClick;
+                    pan.Controls.Add(btn);
+                    //-----------------
                 }
-                //---------------------
                 ha.Controls.Add(pan);
                 td.Controls.Add(ha);
                 tr.Controls.Add(td);

@@ -36,9 +36,40 @@ function topmenuload() {
             document.getElementById(choice).setAttribute("class", "MenuCellClicked");
         }
         else {
+            //Set Current page
+            var current = window.location.href;
+            var split = current.split("/");
+            current = split[split.length - 1].split(".")[0];
+            //alert(current); //VARFÖR KÖRS INTE VID VARJE SIDLADDNING?!?
+            switch (current) {
+                /*case "Default": //Home (Use default case instead!)
+                    document.getElementById("MenuHomeCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuHomeCell");
+                    break;*/
+                case "Category": //Category
+                    document.getElementById("MenuCategoryCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuCategoryCell");
+                    break;
+                case "Community": //Community
+                    document.getElementById("MenuCommunityCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuCommunityCell");
+                    break;
+                case "AboutUs": //About Us
+                    document.getElementById("MenuAboutUsCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuAboutUsCell");
+                    break;
+                case "ContactUs": //Contact Us
+                    document.getElementById("MenuContactUsCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuContactUsCell");
+                    break;
+                default: //Home
+                    document.getElementById("MenuHomeCell").setAttribute("class", "MenuCellClicked");
+                    sessionStorage.setItem("menuchoice", "MenuHomeCell");
+            }
+
             //Set Home (default)
-            document.getElementById("MenuHomeCell").setAttribute("class", "MenuCellClicked");
-            sessionStorage.setItem("menuchoice", "MenuHomeCell");
+            //document.getElementById("MenuHomeCell").setAttribute("class", "MenuCellClicked");
+            //sessionStorage.setItem("menuchoice", "MenuHomeCell");
         }
     }
 }

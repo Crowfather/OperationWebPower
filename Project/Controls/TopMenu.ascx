@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="TopMenu.ascx.cs" Inherits="TopMenu"%>
 
 <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Styles/TopMenu.css") %>" />
-<script src="<%= ResolveUrl("~/Scripts/TopMenu.js") %>"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/Scripts/TopMenu.js") %>"></script>
 
 <asp:Panel ID="Top" runat="server">
     <table id="TopOuterTable">

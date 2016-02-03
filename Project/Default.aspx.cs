@@ -17,7 +17,7 @@ public partial class _Default : System.Web.UI.Page {
 
     // Dynamically fills the news table.
     private void FillNewsTable() {
-
+        
         List<NewsItem> newsItems = null;
 
         SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
@@ -55,7 +55,6 @@ public partial class _Default : System.Web.UI.Page {
             TableRow dividerRow = new TableRow();
             TableCell dividerCell = new TableCell();
 
-
             // --- Adds relevant content for this news instance in each cell respectively --- //
 
             // - Spacing cell - //
@@ -74,6 +73,7 @@ public partial class _Default : System.Web.UI.Page {
             //object imgvid = GetImgVid(FixPath("https://www.youtube.com/watch?v=ytU7kgiqp1s"));
             //object imgvid = GetImgVid(FixPath("https://youtu.be/ytU7kgiqp1s"));
             if (imgvid is System.Web.UI.WebControls.Image) {
+                imageCell.CssClass = "NewsImage";
                 imageCell.Controls.Add((System.Web.UI.WebControls.Image)imgvid);
             }
             else if (imgvid is LiteralControl) { imageCell.Controls.Add((LiteralControl)imgvid); }
@@ -111,6 +111,46 @@ public partial class _Default : System.Web.UI.Page {
                 newstable.Rows.Add(dividerRow);
                 dividerRow.Cells.Add(dividerCell);
             }
+
+            if(Session["Admin"] != null && Convert.ToBoolean(Session["Admin"])) {
+                //Del button
+                Button btn = new Button();
+                btn.ID = "NewsDelBtn" + i; //STOPPA IN NEWS-ID HÄR!!!!!
+                btn.CssClass = "NewsDel";
+                btn.Text = "X";
+                btn.Click += DelClick;
+                btn.OnClientClick = "return YesNo()";
+                //---Register Ajax trigger---
+                AsyncPostBackTrigger trig = new AsyncPostBackTrigger();
+                trig.ControlID = btn.UniqueID;
+                trig.EventName = "Click";
+                UpdatePan.Triggers.Add(trig);
+                //---------------------------
+                imageCell.Controls.Add(btn);
+                imageRow.Cells.Add(imageCell);
+
+                //Edit button
+                btn = new Button();
+                btn.ID = "NewsEditBtn" + i; //STOPPA IN NEWS-ID HÄR!!!!!
+                btn.CssClass = "NewsEdit";
+                btn.Text = "EDIT";
+                btn.Click += EditClick;
+                imageCell.Controls.Add(btn);
+                imageRow.Cells.Add(imageCell);
+            }
+
+        }
+
+        //Add button
+        if (Session["Admin"] != null && Convert.ToBoolean(Session["Admin"]))
+        {
+            //If logged in as admin -> add +ADD button
+            Button btn = new Button();
+            btn.ID = "NewsAdd";
+            btn.Text = "+";
+            btn.Click += AddClick;
+            //VART ADDA BTN!?
+            gearcommunityimagecell.Controls.Add(btn);
         }
     }
 
@@ -125,18 +165,15 @@ public partial class _Default : System.Web.UI.Page {
         return "<" + textTag + ">" + text + "</" + textTag + ">";
     }
 
-    //TEMPFIX: Removes ../ from imagepaths
+    //Removes ../ from imagepaths
     private string FixPath(string path)
     {
-        string ret;
-
         if (path.StartsWith("../"))
         {
-            ret = path.Substring(3);
+            return path.Substring(3);
         }
-        else { ret = path; }
 
-        return ret;
+        return path;
     }
 
     private object GetImgVid(string path)
@@ -153,7 +190,6 @@ public partial class _Default : System.Web.UI.Page {
         if (path != "")
         {
             System.Web.UI.WebControls.Image image = new System.Web.UI.WebControls.Image();
-            //image.CssClass = "";
             image.AlternateText = "News image";
             image.ImageUrl = path;
             image.Visible = true;
@@ -206,5 +242,49 @@ public partial class _Default : System.Web.UI.Page {
         }
 
         return null;
+    }
+
+    //The function called by the Add-button.
+    protected void AddClick(object sender, EventArgs e)
+    {
+        //Response.Redirect("AddCategory.aspx");
+    }
+
+    //The function called by the Edit-button
+    protected void EditClick(object sender, EventArgs e)
+    {
+        //Get newstitle (get title of news associated with the pressed Edit-button)
+        string toedit = ((Button)sender).ID.Replace("NewsEditBtn", "");
+        
+        //Response.Redirect(toedit);
+    }
+
+    /*
+            The function called by the Delete-buttons.
+            (Registers as a trigger on the updatepanel (AJAX))
+    */
+    protected void DelClick(object sender, EventArgs e)
+    {
+        //Remove news (get title of news associated with the pressed X-button)
+        string toremove = ((Button)sender).ID.Replace("NewsDelBtn", "");
+
+        SqlConnection sqlconn = DatabaseHelper.OpenDatabase(Server.MapPath("~/LoginData.txt"));
+        if (sqlconn != null)
+        {
+            /*if (DatabaseHelper.RemoveMainCategory(sqlconn, toremove))
+            {
+                //cats.Remove(toremove);
+            }*/
+
+            DatabaseHelper.CloseDatabase(sqlconn);
+        }
+        else
+        {
+            // TODO display database error
+        }
+
+        //CreateCategoryTable(cats);
+
+        UpdatePan.Update();
     }
 }

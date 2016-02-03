@@ -17,29 +17,31 @@
         <div id="LeftFiller"></div>
         <div id="RightFiller"></div> 
         <div id="MainContent">
-            <!-- Note: changing the id of this table will make it unreachable from the code-behind -->
-            <!-- If you change the id you are also responsible to update all references in the code-behind -->
-            <table id="containertable" runat="server">
-                <tr>
-                    <td id="gearcommunityimagecell">
-                        <img src="../Resources/Img/GearCommunity75PercentSize.png" alt="Gear Community" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Table id="newstable" runat="server">
-                            <asp:TableRow>
-                                <asp:TableCell>
-                                    <!-- Dynamically filled with rows, columns and news content (see code-behind) -->
-                                </asp:TableCell>
-                            </asp:TableRow>
-                        </asp:Table>
-                    </td>
-                    <%-- <td id="containertable_fillercell_right">
-                        <!-- Right side filler -->
-                    </td> --%>
-                </tr>
-            </table>
+            <asp:ScriptManager ID="ScriptMan" runat="server" />
+            <asp:UpdatePanel ID="UpdatePan" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
+                <ContentTemplate>
+                    <!-- Note: changing the id of this table will make it unreachable from the code-behind -->
+                    <!-- If you change the id you are also responsible to update all references in the code-behind -->
+                    <table id="containertable" runat="server">
+                        <tr>
+                            <td id="gearcommunityimagecell" runat="server">
+                                <img src="../Resources/Img/GearCommunity75PercentSize.png" alt="Gear Community" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Table id="newstable" runat="server">
+                                    <%-- Dynamically filled with rows, columns and news content (see code-behind) --%>
+                                </asp:Table>
+                            </td>
+                            <%-- <td id="containertable_fillercell_right">
+                                <!-- Right side filler -->
+                            </td> --%>
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            
         </div>
     </div>
     </form>
