@@ -94,8 +94,7 @@ public partial class Pages_ProductsCategory : System.Web.UI.Page
     protected void EditClick(object sender, EventArgs e)
     {
         //Get category (get text of category associated with the pressed Edit-button)
-        string toedit = ((HtmlGenericControl)((Button)sender).Parent.Controls[0]).InnerText;
-
+        string toedit = ((HtmlGenericControl)((Button)sender).Parent.Controls[1]).InnerText;
     }
 
     private void CreateProdsCatTable(List<ProductCategoryItem> cats) {

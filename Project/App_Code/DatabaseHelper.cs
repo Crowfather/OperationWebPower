@@ -441,6 +441,62 @@ public static class DatabaseHelper
     }
 
     /////////
+    //Product
+    /////////
+
+    public static bool ProductExist(SqlConnection sqlconn, string productName) {
+        SqlCommand query = new SqlCommand("SELECT dbo.func_product_exist(@productName)", sqlconn);
+        query.CommandType = CommandType.Text;
+
+        query.Parameters.Add("@productName", SqlDbType.VarChar);
+        query.Parameters["@productName"].Value = productName;
+
+        try {
+            return (bool)query.ExecuteScalar();
+        }
+        catch {
+            return false;
+        }
+    }
+
+    public static bool CreateProduct(SqlConnection sqlconn, string productName, string picturePath, string description, string productText, string contentText, string systemReq) {
+        SqlCommand query = new SqlCommand("proc_create_product", sqlconn);
+        query.CommandType = CommandType.StoredProcedure;
+
+        query.Parameters.Add("@productName", SqlDbType.VarChar);
+        query.Parameters["@productName"].Value = productName;
+
+        query.Parameters.Add("@picturePath", SqlDbType.VarChar);
+        query.Parameters["@picturePath"].Value = picturePath;
+
+        query.Parameters.Add("@description", SqlDbType.VarChar);
+        query.Parameters["@description"].Value = description;
+
+        query.Parameters.Add("@productText", SqlDbType.VarChar);
+        query.Parameters["@productText"].Value = productText;
+
+        query.Parameters.Add("@contentText", SqlDbType.VarChar);
+        query.Parameters["@contentText"].Value = contentText;
+
+        query.Parameters.Add("@systemRequirements", SqlDbType.VarChar);
+        query.Parameters["@systemRequirements"].Value = systemReq;
+
+        try {
+            int result = query.ExecuteNonQuery();
+
+            if (result == -1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch {
+            return false;
+        }
+    }
+
+    /////////
     //News
     /////////
 
