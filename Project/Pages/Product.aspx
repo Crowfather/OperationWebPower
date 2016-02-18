@@ -94,15 +94,15 @@
                                 <!-- Text sections cell -->
                                 <td>
                                     <div id="product_section_text">
-                                        <h6 id="databind_productText" runat="server">Product text.</h6>
+                                        <p id="databind_productText" runat="server">Product text.</p>
                                     </div>
 
                                     <div id="content_section_text">
-                                        <h6 id="databind_contentText" runat="server">Content text.</h6>
+                                        <p id="databind_contentText" runat="server">Content text.</p>
                                     </div>
 
                                     <div id="sysreq_section_text">
-                                        <h6 id="databind_systemReq" runat="server">System requirements.</h6>
+                                        <p id="databind_systemReq" runat="server">System requirements.</p>
                                     </div>
                                 </td>
                             </tr>
