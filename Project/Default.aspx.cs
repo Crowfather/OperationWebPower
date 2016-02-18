@@ -83,7 +83,7 @@ public partial class _Default : System.Web.UI.Page {
             InsertText(titleCell, newsItems[i].Title, "h3");
 
             // - Text cell - //
-            InsertText(textCell, newsItems[i].Text, "h6");
+            InsertText(textCell, newsItems[i].Text, "p");
 
             // - Divider cell - //
             dividerCell.BackColor = Color.FromArgb(67, 107, 145);
