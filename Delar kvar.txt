@@ -1,11 +1,13 @@
-KVAR ATT FIXA TILL OSCAR:
+﻿KVAR ATT FIXA TILL OSCAR:
 -------------------------
-Lägg till produkt funktion + sida -	R
-Editera produkt -			E(knapp)/R(funktionalitet + sida)
-Fixa text "design" -			T
-Flytta Databas & sida till webbhotell -	?
-Fixa in Admin kontot (Oscars) -		R
-Fixa mer Share? -			C
-Fixa in Oscars text till Share - C
-Fixa Rating -				C
-Fixa in Lägg till, Ta bort & Edit news - T/E/R
+Lägg till produkt funktion + sida
+Editera produkt
+Fixa text "design"
+Flytta Databas & sida till webbhotell
+Fixa in Admin kontot (Oscars)
+Fixa mer Share?
+Fixa in Oscars text till Share
+Fixa Rating
+Fixa in Lägg till, Ta bort & Edit news
+Delete + Edit knapp inne på en Produkt
+
