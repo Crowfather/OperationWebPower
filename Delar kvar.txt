@@ -1,7 +1,6 @@
 ﻿KVAR ATT FIXA TILL OSCAR:
 -------------------------
 Editera produkt
-Fixa text "design"
 Flytta Databas & sida till webbhotell
 Fixa in Admin kontot (Oscars)
 Fixa mer Share?
